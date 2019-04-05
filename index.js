@@ -20,21 +20,7 @@ mongoose
   .catch(err => console.log(err))
 
 
-app.post('/', (req,res) =>{
-	let name =req.body.name;
-	console.log(name);
-	user.create({name}, (err, result) =>{
-		if(result) {
-					res.json({
- "messages": [
-   {"text": "Welcome to the Chatfuel Rockets!"},
-   {"text": "What are you up to?"}
- ]
-})
-		}
-	})
 
-})
 
 
 app.use('/admin', admin);

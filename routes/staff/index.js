@@ -1,14 +1,35 @@
-var express = require('express')
-var router = express.Router()
+var express = require('express');
+var router = express.Router();
+var Member = require('../../schema/Member');
 
 
 // define the home page route
 router.post('/create-member', function (req, res) {
-  let id = req.body.ID;
-  let name = req.body.name;
-  let messengerId = req.body["messenger user id"];
-  console.log(`Objects are ${Object.keys(req.body)}`);
-  console.log(`id is ${id}, name is ${name}, messenger is ${messengerId}`)
+  let memberId = req.body.ID;
+  let Name = req.body.name;
+  let code = req.body.code;
+  let memberConfirm = false;
+
+  Member.find({id}, function(err, member) => {
+  	if(member[0] === undefined){
+  		Member.create({memberId, Name, code, memberId}, function(err, result) {
+  			if(res){
+  				res.json({
+  					"messages":[
+  					"text": "Member Created Successfully";
+  					]
+  				})
+  			}
+  		})
+  	}else{
+  		res.json({
+  			"messages":[
+  			{"text": "This member is already existed"}
+  			]
+  		})
+  	}
+  
+
 })
 // define the about route
 router.get('/about', function (req, res) {
