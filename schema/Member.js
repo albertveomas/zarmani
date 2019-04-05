@@ -10,9 +10,9 @@ const member = new Schema({
     	type: String,
     	required: true
     },
-    messengerID: {
-    	type: String,
-    	required: true
+    code:{
+        type:String,
+        required: true
     },
     memberConfirm: {
     	type: Boolean,
