@@ -14,11 +14,14 @@ router.post('/create-member', function (req, res) {
   Member.find({memberId}, function(err, member){
   	if(member[0] === undefined){
   		Member.create({memberId,Name,code,memberConfirm}, function(err, result){
-  			res.json({
+  			if(result){
+  				console.log(result);
+  				res.json({
   					"messages": [
   					{"text": "Member Created Successfully"}
   					]
   				})
+  			}
   		})
   	}else{
   		res.json({
