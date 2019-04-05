@@ -32,6 +32,6 @@ router.post('/create-member', function (req, res) {
 
 
 
-}
+})
 
 module.exports = router;
