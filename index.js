@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const user = require('./user');
 const mongoose = require('mongoose');
