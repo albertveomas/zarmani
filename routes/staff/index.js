@@ -16,7 +16,7 @@ router.post('/create-member', function (req, res) {
   			if(res){
   				res.json({
   					"messages":[
-  					"text": "Member Created Successfully";
+  					"text": "Member Created Successfully"
   					]
   				})
   			}
