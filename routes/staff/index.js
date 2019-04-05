@@ -10,14 +10,14 @@ router.post('/create-member', function (req, res) {
   let code = req.body.code;
   let memberConfirm = false;
 
-  Member.find({memberId}, function(err, member) {
+  Member.find({memberId}, function(err, member){
   	if(member[0] === undefined){
-  		Member.create({memberId, Name, code, memberConfirm}, function(err, result) {
-  			if(res){
+  		Member.create({memberId,Name,code,memberConfirm}, function(err, result){
+  			if(result){
   				res.json({
-  					"messages":[{
-  						"text": "Member Created Successfully"
-  					}]
+  					"messages": [
+  					{"text": "Member Created Successfully"}
+  					]
   				})
   			}
   		})
@@ -28,9 +28,10 @@ router.post('/create-member', function (req, res) {
   			]
   		})
   	}
-  
+  })
 
-})
+
+
 }
 
 module.exports = router;
