@@ -10,9 +10,9 @@ router.post('/create-member', function (req, res) {
   let code = req.body.code;
   let memberConfirm = false;
 
-  Member.find({id}, function(err, member) => {
+  Member.find({memberId}, function(err, member) => {
   	if(member[0] === undefined){
-  		Member.create({memberId, Name, code, memberId}, function(err, result) {
+  		Member.create({memberId, Name, code, memberConfirm}, function(err, result) {
   			if(res){
   				res.json({
   					"messages":[
