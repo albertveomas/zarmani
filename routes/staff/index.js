@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var Member = require('../schema/Member');
+var mongoose = require('mongoose');
+var Member = require('../../schema/Member');
 
 
 // define the home page route
