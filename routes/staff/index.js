@@ -31,9 +31,6 @@ router.post('/create-member', function (req, res) {
   
 
 })
-// define the about route
-router.get('/about', function (req, res) {
- 
-})
+}
 
 module.exports = router;
