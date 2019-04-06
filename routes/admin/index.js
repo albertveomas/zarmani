@@ -149,7 +149,7 @@ router.post('/assign', function(req, res){
     if(res[0]===undefined){
       res.json({
         "messages":[
-          {"text": "You can\'t do admin task"}
+          {"text": "You can't do admin task"}
         ]
       })
     }else{
@@ -170,11 +170,13 @@ router.post('/assign', function(req, res){
               })
             }else{
               assgin.create({messengerId,staffId,pumpId,start,end}, (err ,assigns) => {
+              if(assigns){
                 res.json({
                   "messages": [
                     {"text": `You set assign on Staff ID ${staffId}`}
                   ]
                 })
+              }
               })
             }
           })
