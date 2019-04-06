@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const staff = new Schema({
     staffId: {
-        type: Number,
+        type: String,
         required: true
     },
     Name: {
