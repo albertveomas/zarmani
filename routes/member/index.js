@@ -20,10 +20,14 @@ router.post('/register', function (req, res) {
 			})
 		}else{
 			if(code === result[0].code && result[0].memberConfirm === false){
-				res.json({
-					"messages": [
-					{"text": "Both confirm"}
-					]
+				member.update({memberId}, {$set: {memberConfirm: true}}, function(err, update){
+					if(update){
+						res.json({
+							"messages": [
+							{"text": "updated"}
+							]
+						})
+					}
 				})
 			}else{
 				res.json({
