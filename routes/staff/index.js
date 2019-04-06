@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Member = require('../../schema/Member');
-var Staff = require('../../schema/StaffCreate.js');
+var Staff = require('../../schema/StaffCreate');
 var StaffMessenger = require('../../schema/Staff');
 
 
