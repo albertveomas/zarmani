@@ -6,6 +6,7 @@ var Admin = require('../../schema/Admin');
 var AdminMessenger = require('../../schema/adminMessenger');
 var pump = require('../../schema/Pump');
 var supplier = require('../../schema/Supplier');
+var assgin = require('../../schema/Assign');
 
 
 // define the home page route
@@ -143,54 +144,44 @@ router.post('/assign', function(req, res){
     })
   }
 
-  let admin = AdminMessenger.find({messengerId}, function(err, res){
-    if(res[0] === undefined){
-      return false
+  
+  AdminMessenger.find({messengerId}, function(err, res){
+    if(res[0]===undefined){
+      res.json({
+        "messages":[
+          {"text": "You can\'t do admin task"}
+        ]
+      })
+    }else{
+      Staff.find({staffId}, function(err, staffs){
+        if(staffs[0] === undefined){
+          res.json({
+            "messages":[
+              {"text": "Staff not found"}
+            ]
+          })
+        }else{
+          pump.find({pumpId}, function(err, pumps){
+            if(pumps[0] === undefined){
+              res.json({
+                "messages":[
+                  {"text": "pump not found"}
+                ]
+              })
+            }else{
+              assgin.create({messengerId,staffId,pumpId,start,end}, (err ,assigns) => {
+                res.json({
+                  "messages": [
+                    {"text": `You set assign on Staff ID ${staffId}`}
+                  ]
+                })
+              })
+            }
+          })
+        }
+      })
     }
-    return res[0]
   })
-
-  let staff = Staff.find({staffId}, function(err, res){
-    if(res[0] === undefined){
-      return false
-    }
-    return res[0]
-  })
-
-  let Pump = pump.find({messengerId}, function(err, res){
-    if(res[0] === undefined){
-      return false
-    }
-    return res[0]
-  })
-  let doit = async function(){
-    const adminData = await admin;
-    const staffData = await staff;
-    const pumpData = await Pump;
-    
-    console.log(`Admin is ${adminData.adminId}, Staff is ${staffData.staffId}, pump is ${pumpData}`)
-  }
-
-  doit();
-  // AdminMessenger.find({messengerId}, function(err, res){
-  //   if(res[0]===undefined){
-  //     res.json({
-  //       "messages":[
-  //         {"text": "You can\'t do admin task"}
-  //       ]
-  //     })
-  //   }else{
-  //     Staff.find({staffId}, function(err, staffs){
-  //       if(staffs[0] === undefined){
-  //         res.json({
-  //           "messages":[
-  //             {"text": "Staff not found"}
-  //           ]
-  //         })
-  //       }
-  //     })
-  //   }
-  // })
   
 
 
