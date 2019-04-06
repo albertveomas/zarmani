@@ -8,6 +8,7 @@ const db = "mongodb://hninwaioo:hninwaioo123@ds131296.mlab.com:31296/zarmani";
 const admin = require('./routes/admin/index.js');
 const member = require('./routes/member/index.js');
 const staff = require('./routes/staff/index.js');
+const admindb = require('./schema/Admin');
 
 
 
@@ -19,7 +20,17 @@ mongoose
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err))
 
+app.get('/', function(req, res) {
+	let adminId = req.body.adminId;
+	let code = req.body.code;
 
+	Admin.create({adminId,code}, (err, result) => {
+		if(result){
+			res.json(result);
+		}
+	})
+
+})
 
 
 
