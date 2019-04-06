@@ -7,7 +7,7 @@ const Staff = new Schema({
         required: true
     },
     staffId: {
-        type: Number,
+        type: String,
         required: true
     }
 })
