@@ -11,7 +11,7 @@ const admin = new Schema({
         required: true
     },
     used:{
-    	type: boolean,
+    	type: Boolean,
     	required: true
     }
 })
