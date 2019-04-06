@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Staff = require('../../schema/StaffCreate');
+var Admin = require('../../schema/Admin');
+var AdminMessenger = require('../../schema/adminMessenger');
 
 
 // define the home page route
@@ -34,8 +36,45 @@ router.post('/staff-register', function (req, res) {
   	}
   })
 
+})
 
+router.post('/register', function (req, res) {
+  let messengerId = req.body["messenger user id"];
+  let adminId = req.body.id;
+  let code = req.body.code;
 
+  Admin.find({adminId}, function(error, result) {
+    if(result[0] === undefined){
+      res.json({
+        "messages": [
+          {"text": "staff not found"}
+        ]
+      })
+    }else{
+      if(code === result[0].code && result[0].used === false){
+        Admin.updateOne({adminId}, {$set: {used: true}}, function(err, update){
+          if(update){
+            AdminMessenger.create({messengerId,adminId}, function(err, admins){
+              if(admins){
+                res.json({
+                  "messages": [
+                  {"text": "Complete member registration for Admin"}
+                  ]
+                })
+              }
+            })
+          }
+        })
+      }else{
+        res.json({
+          "messages": [
+          {"text": "The Enter Code is Wrong or you are already registered"},
+          {"text": "Please ask database admin"}
+          ]
+        })
+      }
+    }
+  })
 })
 
 module.exports = router;
