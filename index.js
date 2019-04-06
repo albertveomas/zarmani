@@ -24,7 +24,7 @@ app.get('/', function(req, res) {
 	let adminId = req.body.adminId;
 	let code = req.body.code;
 
-	Admin.create({adminId,code}, (err, result) => {
+	admindb.create({adminId,code}, (err, result) => {
 		if(result){
 			res.json(result);
 		}
