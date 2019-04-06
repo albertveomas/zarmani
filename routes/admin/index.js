@@ -145,8 +145,8 @@ router.post('/assign', function(req, res){
   }
 
   
-  AdminMessenger.find({messengerId}, function(err, res){
-    if(res[0]===undefined){
+  AdminMessenger.find({messengerId}, function(err, admins){
+    if(admins[0]===undefined){
       res.json({
         "messages":[
           {"text": "You can't do admin task"}
