@@ -6,7 +6,7 @@ const customer = new Schema({
         type: String,
         required: true
     },
-    memberID: {
+    memberId: {
         type: Number,
         required: true
     }
