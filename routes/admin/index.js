@@ -5,6 +5,7 @@ var Staff = require('../../schema/StaffCreate');
 var Admin = require('../../schema/Admin');
 var AdminMessenger = require('../../schema/adminMessenger');
 var pump = require('../../schema/Pump');
+var supplier = require('../../schema/Supplier');
 
 
 // define the home page route
@@ -95,6 +96,29 @@ router.post('/pump-register', function(req,res) {
       res.json({
         "messages": [
         {"text": "Pump ID is alreaday registered"}
+        ]
+      })
+    }
+  })
+})
+
+router.post('/supplier-register', function(req,res) {
+  let name = req.body.name;
+  let phone = req.body.phone;
+
+  supplier.find({name}, function(err, suppliers){
+    if(suppliers[0] === undefined){
+      supplier.create({name,phone}, function(err, result){
+        res.json({
+          "messages": [
+          {"text": `Supplier Name ${name} is registered Successfully`}
+          ]
+        })
+      })
+    }else{
+      res.json({
+        "messages": [
+        {"text": "Supplier is alreaday registered"}
         ]
       })
     }
