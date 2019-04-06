@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const user = require('./user');
+
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3000;
 const db = "mongodb://hninwaioo:hninwaioo123@ds131296.mlab.com:31296/zarmani";
