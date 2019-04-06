@@ -150,7 +150,7 @@ router.post('/assign', function(req, res){
     return res[0]
   })
 
-  console.log(`Admin is ${admin}`);
+  console.log(`Admin is ${JSON.stringify(admin)}`);
   // AdminMessenger.find({messengerId}, function(err, res){
   //   if(res[0]===undefined){
   //     res.json({
