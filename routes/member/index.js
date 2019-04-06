@@ -9,6 +9,7 @@ var member = require('../../schema/Member');
 router.post('/register', function (req, res) {
 	let messengerID = req.body["messenger user id"];
 	let memberId = req.body.id;
+	let code = req.body.code;
 
 	member.find({memberId}, function(error, result) {
 		if(result[0] === undefined){
@@ -18,7 +19,8 @@ router.post('/register', function (req, res) {
 				]
 			})
 		}else{
-			customer.create({messengerID,memberId}, function(err, customer){
+			if(code === result[0].code){
+				customer.create({messengerID,memberId}, function(err, customer){
 				if(customer){
 					res.json({
 						"messages": [
@@ -27,6 +29,15 @@ router.post('/register', function (req, res) {
 					})
 				}
 			})
+			}else{
+				res.json({
+					res.json({
+						"messages": [
+						{"text": "THE CODE IS WRONG"}
+						]
+					})
+				})
+			}
 		}
 	})
 })
