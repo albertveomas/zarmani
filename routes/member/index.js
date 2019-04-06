@@ -7,7 +7,7 @@ var member = require('../../schema/Member');
 
 // define the home page route
 router.post('/register', function (req, res) {
-	let messengerID = req.body["messenger user id"];
+	let messengerId = req.body["messenger user id"];
 	let memberId = req.body.id;
 	let code = req.body.code;
 
@@ -22,10 +22,14 @@ router.post('/register', function (req, res) {
 			if(code === result[0].code && result[0].memberConfirm === false){
 				member.update({memberId}, {$set: {memberConfirm: true}}, function(err, update){
 					if(update){
-						res.json({
+						customer.create({messengerId,memberId}, function(err, customers){
+							if(customers){
+								res.json({
 							"messages": [
-							{"text": "updated"}
+							{"text": "Complete Member Register for you"}
 							]
+						})
+							}
 						})
 					}
 				})
