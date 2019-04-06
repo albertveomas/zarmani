@@ -9,6 +9,10 @@ const admin = new Schema({
     adminId: {
         type: String,
         required: true
+    },
+    used:{
+    	type: boolean,
+    	required: true
     }
 })
 
