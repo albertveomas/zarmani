@@ -147,11 +147,31 @@ router.post('/assign', function(req, res){
     if(res[0] === undefined){
       return false
     }
-    console.log(`Result is ${res[0]}`)
     return res[0]
   })
 
-  console.log(`Admin is ${admin.messengerId}, ${admin.adminId}, ${Object.keys(admin)}`);
+  let staff = Staff.find({staffId}, function(err, res){
+    if(res[0] === undefined){
+      return false
+    }
+    return res[0]
+  })
+
+  let Pump = pump.find({messengerId}, function(err, res){
+    if(res[0] === undefined){
+      return false
+    }
+    return res[0]
+  })
+  let doit = async function(){
+    const adminData = await admin;
+    const staffData = await staff;
+    const pumpData = await Pump;
+    
+    console.log(`Admin is ${adminData.adminId}, Staff is ${staffData.staffId}, pump is ${pumpData}`)
+  }
+
+  doit();
   // AdminMessenger.find({messengerId}, function(err, res){
   //   if(res[0]===undefined){
   //     res.json({
