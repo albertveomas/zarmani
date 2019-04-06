@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var Staff = require('../../schema/StaffCreate');
 var Admin = require('../../schema/Admin');
 var AdminMessenger = require('../../schema/adminMessenger');
+var pump = require('../../schema/Pump');
 
 
 // define the home page route
@@ -77,4 +78,26 @@ router.post('/register', function (req, res) {
   })
 })
 
+router.post('/pump-register', function(req,res) {
+  let pumpId = req.body.pump;
+  let type = req.body.type;
+
+  pump.find({pumpId}, function(err, pumps){
+    if(pumps[0] === undefined){
+      pump.create({pumpId,type}, function(err, res){
+        res.json({
+          "messages": [
+          {"text": `Petrol type ${type} with Pump ID ${pumpId} is registered`}
+          ]
+        })
+      })
+    }else{
+      res.json({
+        "messages": [
+        {"text": "Pump ID is alreaday registered"}
+        ]
+      })
+    }
+  })
+})
 module.exports = router;
