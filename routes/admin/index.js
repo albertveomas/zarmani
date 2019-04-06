@@ -84,7 +84,7 @@ router.post('/pump-register', function(req,res) {
 
   pump.find({pumpId}, function(err, pumps){
     if(pumps[0] === undefined){
-      pump.create({pumpId,type}, function(err, res){
+      pump.create({pumpId,type}, function(err, result){
         res.json({
           "messages": [
           {"text": `Petrol type ${type} with Pump ID ${pumpId} is registered`}
