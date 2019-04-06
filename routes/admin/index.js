@@ -129,8 +129,10 @@ router.post('/assign', function(req, res){
   let staffId = req.body.ID;
   let pumpId = req.body.pumpId;
   let startDate = req.body.start;
+  let endDate = req.body.end;
   let start = new Date(startDate);
   let end = new Date(endDate);
+
 
   if(start == 'Invalid Date' || end == 'Invalid Date'){
     res.json({
@@ -139,5 +141,8 @@ router.post('/assign', function(req, res){
       ]
     })
   }
+  
+
+
 })
 module.exports = router;
