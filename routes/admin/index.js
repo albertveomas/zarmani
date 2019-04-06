@@ -47,7 +47,7 @@ router.post('/register', function (req, res) {
     if(result[0] === undefined){
       res.json({
         "messages": [
-          {"text": "staff not found"}
+          {"text": "admin not found"}
         ]
       })
     }else{
