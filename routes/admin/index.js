@@ -126,6 +126,7 @@ router.post('/supplier-register', function(req,res) {
 })
 
 router.post('/assign', function(req, res){
+  let messengerId = req.body["messenger user id"];
   let staffId = req.body.ID;
   let pumpId = req.body.pumpId;
   let startDate = req.body.start;
@@ -141,6 +142,34 @@ router.post('/assign', function(req, res){
       ]
     })
   }
+
+  let admin = AdminMessenger.find({messengerId}, function(err, res){
+    if(res[0] === undefined){
+      return false
+    }
+    return res[0]
+  })
+
+  console.log(`Admin is ${admin}`);
+  // AdminMessenger.find({messengerId}, function(err, res){
+  //   if(res[0]===undefined){
+  //     res.json({
+  //       "messages":[
+  //         {"text": "You can\'t do admin task"}
+  //       ]
+  //     })
+  //   }else{
+  //     Staff.find({staffId}, function(err, staffs){
+  //       if(staffs[0] === undefined){
+  //         res.json({
+  //           "messages":[
+  //             {"text": "Staff not found"}
+  //           ]
+  //         })
+  //       }
+  //     })
+  //   }
+  // })
   
 
 
