@@ -147,10 +147,11 @@ router.post('/assign', function(req, res){
     if(res[0] === undefined){
       return false
     }
+    console.log(`Result is ${res[0]}`)
     return res[0]
   })
 
-  console.log(`Admin is ${admin.messengerId}, ${admin.adminId}`);
+  console.log(`Admin is ${admin.messengerId}, ${admin.adminId}, ${JSON.stringify(admin)}`);
   // AdminMessenger.find({messengerId}, function(err, res){
   //   if(res[0]===undefined){
   //     res.json({
