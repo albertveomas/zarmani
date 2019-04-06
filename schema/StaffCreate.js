@@ -13,7 +13,7 @@ const staff = new Schema({
     phone: {
         type: Number,
         required: true
-    }
+    },
     code:{
         type:String,
         required: true
