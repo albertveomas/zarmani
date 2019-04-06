@@ -124,4 +124,20 @@ router.post('/supplier-register', function(req,res) {
     }
   })
 })
+
+router.post('/assign', function(req, res){
+  let staffId = req.body.ID;
+  let pumpId = req.body.pumpId;
+  let startDate = req.body.start;
+  let start = new Date(startDate);
+  let end = new Date(endDate);
+
+  if(start == 'Invalid Date' || end == 'Invalid Date'){
+    res.json({
+      "messages":[
+        {"text": "Please check your start date and end date"}
+      ]
+    })
+  }
+})
 module.exports = router;
