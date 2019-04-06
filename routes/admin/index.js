@@ -129,7 +129,7 @@ router.post('/supplier-register', function(req,res) {
 router.post('/assign', function(req, res){
   let messengerId = req.body["messenger user id"];
   let staffId = req.body.ID;
-  let pumpId = req.body.pumpId;
+  let pumpId = req.body.pump;
   let startDate = req.body.start;
   let endDate = req.body.end;
   let start = new Date(startDate);
