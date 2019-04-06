@@ -19,23 +19,24 @@ router.post('/register', function (req, res) {
 				]
 			})
 		}else{
-			if(code === result[0].code){
+			if(code === result[0].code && result[0].memberConfirm === false){
 				customer.create({messengerID,memberId}, function(err, customer){
 				if(customer){
-					res.json({
+					member.update({memberId}, {memberConfirm: true}, function(err, update){
+						res.json({
 						"messages": [
 							{"text": "Customer is created with the MemberID"}
 						]
+						})
 					})
 				}
 			})
 			}else{
 				res.json({
-					res.json({
-						"messages": [
-						{"text": "THE CODE IS WRONG"}
-						]
-					})
+					"messages": [
+					{"text": "The Enter Code is Wrong or you are already registered"},
+					{"text": "Please ask adminstrator"}
+					]
 				})
 			}
 		}
