@@ -216,7 +216,7 @@ router.post('/update-fuel', function(req,res) {
             if(update){
               res.json({
                 "messages": [
-                  {"text": `You updated price of fuel ${update[0].Name} to ${update[0].price}`}
+                  {"text": `You updated price of fuel ${Name} to ${price}`}
                 ]
               })
             }
