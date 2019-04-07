@@ -75,7 +75,7 @@ router.post('/register', function (req, res) {
 	})
 })
 
-router.post('/view-assign/', function(req, res) {
+router.get('/view-assign/', function(req, res) {
 	let messengerId = req.body["messenger user id"];
 	console.log(`Messenger id is ${messengerId}`)
 
