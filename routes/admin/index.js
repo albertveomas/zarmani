@@ -83,7 +83,7 @@ router.post('/register', function (req, res) {
 
 router.post('/pump-register', function(req,res) {
   let pumpId = req.body.pump;
-  let type = req.body.type;
+  let type = (req.body.type).toLowerCase();
 
   pump.find({pumpId}, function(err, pumps){
     if(pumps[0] === undefined){
@@ -194,25 +194,39 @@ router.post('/update-fuel', function(req,res) {
   let name = req.body.name;
   let Name = name.toLowerCase();
   let price = req.body.price;
+  let messengerId = req.body["messenger user id"];
 
-  fuel.find({Name}, function(err, fuels){
-    if(fuels[0] === undefined){
+  AdminMessenger.find({messengerId}, (err, admin) => {
+    if(admin[0] === undefined){
       res.json({
         "messages": [
-          {"text": "Fuel Not found"}
+          {"text": "You are not allowed to do this operation"}
         ]
       })
     }else{
-      fuel.updateOne({Name}, {$set:{price}}, function(err, update){
-        if(update){
+      fuel.find({Name}, function(err, fuels){
+        if(fuels[0] === undefined){
           res.json({
             "messages": [
-              {"text": `You updated price of fuel ${update[0].Name} to ${update[0].price}`}
+              {"text": "Fuel Not found"}
             ]
+          })
+        }else{
+          fuel.updateOne({Name}, {$set:{price}}, function(err, update){
+            if(update){
+              res.json({
+                "messages": [
+                  {"text": `You updated price of fuel ${update[0].Name} to ${update[0].price}`}
+                ]
+              })
+            }
           })
         }
       })
     }
   })
+  
+
+  
 })
 module.exports = router;
