@@ -75,7 +75,7 @@ router.post('/register', function (req, res) {
 	})
 })
 
-router.get('/', function(req, res) {
+router.get('/view-assign', function(req, res) {
 	let messengerId = req.body["messenger user id"];
 
 	StaffMessenger.find({messengerId}, function(err, staff){
@@ -87,7 +87,6 @@ router.get('/', function(req, res) {
 			})
 		}else{
 			Assign.find({stafId: staff[0].staffId}, function(err, assign){
-				console.log(`Assign is ${assign[0]}`)
 				if(assign){
 					res.json({
 						"messages": [
