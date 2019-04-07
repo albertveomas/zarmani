@@ -92,7 +92,7 @@ router.post('/view-assign/', function(req, res) {
 					res.json({
 						"messages": [
 							{"text": 
-							`You were assigned at PumpId ${assgin[0].pumpId}
+							`You were assigned at PumpId ${assign[0].pumpId}
 							 Start Date is ${assign[0].start}
 							 End Date is ${assign[0].end}	
 							`}
