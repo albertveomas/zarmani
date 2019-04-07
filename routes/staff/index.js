@@ -12,11 +12,12 @@ router.post('/create-member', function (req, res) {
   let Name = req.body.name;
   let code = req.body.code;
   let memberConfirm = false;
+  let point = 0;
 
 
   Member.find({memberId}, function(err, member){
   	if(member[0] === undefined){
-  		Member.create({memberId,Name,code,memberConfirm}, function(err, result){
+  		Member.create({memberId,Name,code,memberConfirm,point}, function(err, result){
   			if(result){
   				console.log(result);
   				res.json({
@@ -75,7 +76,7 @@ router.post('/register', function (req, res) {
 	})
 })
 
-router.post('/view-assign/', function(req, res) {
+router.get('/view-assign/', function(req, res) {
 	let messengerId = req.body["messenger user id"];
 	console.log(`Messenger id is ${messengerId}`)
 
@@ -102,5 +103,7 @@ router.post('/view-assign/', function(req, res) {
 		}
 	})
 })
+
+
 
 module.exports = router;
