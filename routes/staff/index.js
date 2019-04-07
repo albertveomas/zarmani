@@ -87,6 +87,7 @@ router.get('/', function(req, res) {
 			})
 		}else{
 			Assign.find({stafId: staff[0].staffId}, function(err, assign){
+				console.log(`Assign is ${assign[0]}`)
 				if(assign){
 					res.json({
 						"messages": [
