@@ -89,6 +89,7 @@ router.post('/view-assign/', function(req, res) {
 		}else{
 			Assign.find({stafId: staff[0].staffId}, function(err, assign){
 				if(assign){
+					console.log(`Assign is ${assign}`)
 					res.json({
 						"messages": [
 							{"text": 
