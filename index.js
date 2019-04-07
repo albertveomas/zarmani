@@ -8,6 +8,7 @@ const db = "mongodb://hninwaioo:hninwaioo123@ds131296.mlab.com:31296/zarmani";
 const admin = require('./routes/admin/index.js');
 const member = require('./routes/member/index.js');
 const staff = require('./routes/staff/index.js');
+const fuel = require('./schema/Fuel');
 
 
 
@@ -20,7 +21,16 @@ mongoose
   .catch(err => console.log(err))
 
 
+app.get('/', (req,res) => {
+  let name = req.body.name;
+  let price = req.body.price;
 
+  fuel.create({name,price}, (err, result) => {
+    res.json(result);
+  })
+
+
+})
 
 app.use('/admin', admin);
 app.use('/member', member);
