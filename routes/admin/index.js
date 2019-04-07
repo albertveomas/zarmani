@@ -7,6 +7,7 @@ var AdminMessenger = require('../../schema/adminMessenger');
 var pump = require('../../schema/Pump');
 var supplier = require('../../schema/Supplier');
 var assgin = require('../../schema/Assign');
+var fuel = require('../../schema/Fuel');
 
 
 // define the home page route
@@ -187,5 +188,31 @@ router.post('/assign', function(req, res){
   
 
 
+})
+
+router.post('/update-fuel', function(req,res) {
+  let name = req.body.name;
+  let Name = name.toLowerCase();
+  let price = req.body.price;
+
+  fuel.find({Name}, function(err, fuels){
+    if(fuels[0] === undefined){
+      res.json({
+        "messages": [
+          {"text": "Fuel Not found"}
+        ]
+      })
+    }else{
+      fuel.updateOne({Name}, {$set:{price}}, function(err, update){
+        if(update){
+          res.json({
+            "messages": [
+              {"text": `You updated price of fuel ${update[0].Name} to ${update[0].price}`}
+            ]
+          })
+        }
+      })
+    }
+  })
 })
 module.exports = router;
