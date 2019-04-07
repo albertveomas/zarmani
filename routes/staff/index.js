@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Member = require('../../schema/Member');
 var Staff = require('../../schema/StaffCreate');
 var StaffMessenger = require('../../schema/Staff');
-
+var Assign = require('../../schema/Assign');
 
 // define the home page route
 router.post('/create-member', function (req, res) {
@@ -71,6 +71,34 @@ router.post('/register', function (req, res) {
 					]
 				})
 			}
+		}
+	})
+})
+
+router.get('/', function(req, res) {
+	let messengerId = req.body["messenger user id"];
+
+	StaffMessenger.find({messengerId}, function(err, staff){
+		if(staff[0] === undefined){
+			res.json({
+				"messages": [
+					{"text": "You are not allowed to do"}
+				]
+			})
+		}else{
+			Assign.find({stafId: staff[0].staffId}, function(err, assign){
+				if(assign){
+					res.json({
+						"messages": [
+							{"text": 
+							`You were assigned at PumpId ${assgin[0].pumpId}
+							 Start Date is ${assign[0].start}
+							 End Date is ${assign[0].end}	
+							`}
+						]
+					})
+				}
+			})
 		}
 	})
 })
