@@ -22,10 +22,10 @@ mongoose
 
 
 app.get('/', (req,res) => {
-  let name = req.body.name;
+  let Name = req.body.name;
   let price = req.body.price;
 
-  fuel.create({name,price}, (err, result) => {
+  fuel.create({Name,price}, (err, result) => {
     res.json(result);
   })
 
