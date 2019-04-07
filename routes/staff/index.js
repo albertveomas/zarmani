@@ -87,10 +87,19 @@ router.post('/view-assign/', function(req, res) {
 				]
 			})
 		}else{
-			res.json({
-				"messages": [
-					{"text": "found"}
-				]
+			Assign.find({staffId: staff[0].staffId}, function(err, assign){
+				if(assign){
+					console.log(`Assign is ${assign}`)
+					res.json({
+						"messages": [
+							{"text": 
+							`You were assigned at PumpId ${assign[0].pumpId}
+							 Start Date is ${assign[0].start}
+							 End Date is ${assign[0].end}	
+							`}
+						]
+					})
+				}
 			})
 		}
 	})
