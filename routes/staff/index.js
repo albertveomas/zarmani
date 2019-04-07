@@ -75,7 +75,7 @@ router.post('/register', function (req, res) {
 	})
 })
 
-router.get('/view-assign/', function(req, res) {
+router.post('/view-assign/', function(req, res) {
 	let messengerId = req.body["messenger user id"];
 	console.log(`Messenger id is ${messengerId}`)
 
@@ -87,19 +87,10 @@ router.get('/view-assign/', function(req, res) {
 				]
 			})
 		}else{
-			Assign.find({stafId: staff[0].staffId}, function(err, assign){
-				if(assign){
-					console.log(`Assign is ${assign}`)
-					res.json({
-						"messages": [
-							{"text": 
-							`You were assigned at PumpId ${assign[0].pumpId}
-							 Start Date is ${assign[0].start}
-							 End Date is ${assign[0].end}	
-							`}
-						]
-					})
-				}
+			res.json({
+				"messages": [
+					{"text": "found"}
+				]
 			})
 		}
 	})
