@@ -108,7 +108,13 @@ router.post('/check-point', function(req, res) {
 	let memberId = req.body.ID;
 
 	Member.find({memberId}, function(err, member){
-		if(member){
+		if(member[0] === undefined){
+			res.json({
+				"messages": [
+					{"text": `Memmber not found`}
+				]
+			})
+		}else{
 			res.json({
 				"messages": [
 					{"text": `The check point of Member ID ${memberId} is ${member[0].point}`}
