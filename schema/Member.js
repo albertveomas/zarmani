@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const member = new Schema({
     memberId: {
-        type: Number,
+        type: String,
         required: true
     },
     Name: {

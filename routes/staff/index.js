@@ -5,6 +5,8 @@ var Member = require('../../schema/Member');
 var Staff = require('../../schema/StaffCreate');
 var StaffMessenger = require('../../schema/Staff');
 var Assign = require('../../schema/Assign');
+var Member = require('../../schema/Member');
+var customer = require('../../schema/Customer');
 
 // define the home page route
 router.post('/create-member', function (req, res) {
@@ -124,6 +126,32 @@ router.post('/check-point', function(req, res) {
 	})
 })
 
+router.post('/give-point', function(req,res){
+	let memberID = req.body.id;
+	let liter = req.body.liter;
+	let point = liter/10;
+	let messengerId = req.body["messenger user id"];
+	customer.find({messengerId}, function(err, customers) {
+		if(customers[0] === undefined){
+			res.json({
+				"messages": [
+					{"text": "You are not allowed to do"}
+				]
+			})
+		}else{
+			Memeber.updateOne({memberId:customers[0].memberId}, {$set: {point}, function(err, members){
+				if(members){
+					res.json({
+						"messages": [
+							{"text": `Point Updated`}
+						]
+					})
+				}
+			}})
+		}
+	})
+
+})
 
 
 module.exports = router;

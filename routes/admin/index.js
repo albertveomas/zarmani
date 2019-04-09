@@ -318,7 +318,7 @@ router.post('/edit-debt', function(req, res) {
             if(result){
               res.json({
                 "messages": [
-                  {"text": `Debt amount ${result[0].debt} is updated`}
+                  {"text": `Debt amount ${debt} is updated`}
                 ]
               })
             }
