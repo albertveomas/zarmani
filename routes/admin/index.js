@@ -238,19 +238,6 @@ router.post('/update-fuel', function(req,res) {
       })
     }
   })
-  
-router.post('/check-debt', function(req, res) {
-  let name = req.body.name;
-  let messengerId = req.body["messenger user id"];
+ }) 
 
-  AdminMessenger({messengerId}, (err, admin) => {
-    if(admin[0] === undefined) {
-      console.log('wrong')
-    }else{
-      console.log('rigt')
-    }
-  })
-
-  
-})
 module.exports = router;
