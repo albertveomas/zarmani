@@ -127,7 +127,7 @@ router.post('/check-point', function(req, res) {
 })
 
 router.post('/give-point', function(req,res){
-	let memberID = req.body.id;
+	let memberId = req.body.id;
 	let liter = req.body.liter;
 	let point = liter/10;
 	let messengerId = req.body["messenger user id"];
@@ -141,7 +141,13 @@ router.post('/give-point', function(req,res){
 		}else{
 			console.log(`allowed`);
 			Member.updateOne({memberId}, {$set: {point}, function(err, members){
-				console.log(`Memebers is ${members}`);
+				res.json({
+					"messages": [
+						{
+							"text": "Point Updated"
+						}
+					]
+				})
 			
 			}})
 		}
