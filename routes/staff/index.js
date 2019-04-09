@@ -130,8 +130,6 @@ router.post('/give-point', function(req,res){
 	let memberID = req.body.id;
 	let liter = req.body.liter;
 	let point = liter/10;
-
-	console.log(`point is ${point}`);
 	let messengerId = req.body["messenger user id"];
 	customer.find({messengerId}, function(err, customers) {
 		if(customers[0] === undefined){
@@ -141,7 +139,7 @@ router.post('/give-point', function(req,res){
 				]
 			})
 		}else{
-			Memeber.updateOne({memberId:customers[0].memberId}, {$set: {point}, function(err, members){
+			Member.updateOne({memberId:customers[0].memberId}, {$set: {point}, function(err, members){
 				if(members){
 					res.json({
 						"messages": [
