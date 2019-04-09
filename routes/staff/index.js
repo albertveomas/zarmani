@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Member = require('../../schema/Member');
 var Staff = require('../../schema/StaffCreate');
 var StaffMessenger = require('../../schema/Staff');
 var Assign = require('../../schema/Assign');
 var customer = require('../../schema/Customer');
+var member = require('../../schema/Member');
 
 // define the home page route
 router.post('/create-member', function (req, res) {
@@ -140,16 +140,15 @@ router.post('/give-point', function(req,res){
 			})
 		}else{
 			console.log(`allowed`);
-			Member.updateOne({memberId}, {$set: {point}}, (err, members) => {
-				console.log(`Member is ${members[0]}`)
-				if(members){
-					res.json({
-						"messages":[
-							{"text": "Point updated"}
-						]
-					})
+			member.updateOne({memberId}, {$set:{point}}, function(err, result){
+				if(result){
+				  res.json({
+					"messages": [
+					  {"text": `Up`}
+					]
+				  })
 				}
-			})
+			  })
 		}
 	})
 
