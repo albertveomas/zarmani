@@ -5,7 +5,6 @@ var Member = require('../../schema/Member');
 var Staff = require('../../schema/StaffCreate');
 var StaffMessenger = require('../../schema/Staff');
 var Assign = require('../../schema/Assign');
-var Member = require('../../schema/Member');
 var customer = require('../../schema/Customer');
 
 // define the home page route
