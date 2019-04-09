@@ -130,6 +130,7 @@ router.post('/give-point', function(req,res){
 	let point = (req.body.liter)/10;
 	let memberId = req.body.id;
 
+	console.log(`Memberid is ${memberId}`)
 	console.log(`POint is ${point}`)
 	member.find({memberId}, (err, result) => {
 		console.log(result)
