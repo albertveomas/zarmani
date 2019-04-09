@@ -243,37 +243,14 @@ router.post('/check-debt', function(req, res) {
   let name = req.body.name;
   let messengerId = req.body["messenger user id"];
 
-  console.log(`Name is ${name}, messenger ${messengerId}`)
-
-  AdminMessenger.find({messengerId}, function(err, admin){
-    if(admin[0]=== undefined){
-      res.json({
-        "messages": [
-        {"text": "You are not allowed"}
-        ]
-      })
+  AdminMessenger({messengerId}, (err, admin) => {
+    if(admin[0] === undefined) {
+      console.log('wrong')
     }else{
-      console.log(`Allowed`)
-      supplier.find({name: {$regex: name}}, function(err, supplier) {
-        console.log(`Supplier is ${supplier}`)
-        if(supplier[0] === undefined){
-          res.json({
-            "messages": [
-              {"text": "Supplier not found"}
-              ]
-              })
-        }else{
-          res.json({
-            "messages": [
-            {"text": `Name:${supplier[0].name}\nDebt: ${supplier[0].debt}`}
-            ]
-          })
-        }
-      })
+      console.log('rigt')
     }
   })
 
-})
   
 })
 module.exports = router;
