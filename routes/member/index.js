@@ -48,8 +48,9 @@ router.post('/register', function (req, res) {
 
 router.post('/fuel-price/octane', function(req, res) {
 	let messengerId = req.body["messenger user id"];
-	let Name = req.body.type;
+	let Name = req.body.octane;
 
+	console.log(`Messenger id is ${messengerId}`)
 	console.log(`Fuel is ${Name}`)
 	customer.find({messengerId}, function(err, customers) {
 		if(cusotmers[0] === undefined){
