@@ -13,6 +13,10 @@ const supplier = new Schema({
     debt: {
     	type: Number,
     	required: true
+    },
+    date: {
+        type: Date,
+        required: true
     }
 })
 

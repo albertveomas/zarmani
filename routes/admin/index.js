@@ -109,6 +109,17 @@ router.post('/supplier-register', function(req,res) {
   let phone = req.body.phone;
   let messengerId = req.body["messenger user id"];
   let debt = req.body.debt;
+  let date = new Date (req.body.date);
+
+  if(date == 'Invalid Date'){
+    res.json({
+      "messages": [
+        {"text": "Date is invalid"}
+      ]
+       
+      
+    })
+  }
 
   AdminMessenger.find({messengerId}, function(err, admin) {
     if(admin[0] === undefined){
@@ -120,7 +131,7 @@ router.post('/supplier-register', function(req,res) {
     }else{
         supplier.find({name}, function(err, suppliers){
     if(suppliers[0] === undefined){
-      supplier.create({name,phone,debt}, function(err, result){
+      supplier.create({name,phone,debt,date}, function(err, result){
         res.json({
           "messages": [
           {"text": `Supplier Name ${name} is registered Successfully`}
@@ -243,7 +254,32 @@ router.post('/update-fuel', function(req,res) {
 router.post('/check-debt', (req, res) => {
   let name = req.body.name;
   let messengerId = req.body["messenger user id"];
-
-  console.log(`name is${name}`)
+  
+  AdminMessenger.find({messengerId}, function(err, admin) {
+    if(admin[0] === undefined){
+      res.json({
+        "messages": [
+          {"text": "You are not allowed"}
+        ]
+      })
+    }else{
+      supplier.find({name: {$regex: name}}, function(err, suppliers) {
+        if(suppliers[0] === undefined){
+          res.json({
+            "messages": [
+              {"text": "Supplier is not found"}
+            ]
+          })
+        }else{
+          res.json({
+            "messages": [
+              {"text": `Name: ${suppliers[0].name}\n Debt:${suppliers[0].debt} \n Date: ${suppliers[0].date}`}
+            ]
+          })
+        }
+      })
+    }
+  })
+  
 })
 module.exports = router;
