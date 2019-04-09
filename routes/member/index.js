@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var customer = require('../../schema/Customer');
 var member = require('../../schema/Member');
+var fuel = require('../../schema/Fuel');
 
 
 // define the home page route
@@ -45,4 +46,29 @@ router.post('/register', function (req, res) {
 	})
 })
 
+router.post('/fuel-price/octane', function(req, res) {
+	let messengerId = req.body["messenger user id"];
+	let Name = req.body.type;
+
+	console.log(`Fuel is ${Name}`)
+	customer.find({messengerId}, function(err, customers) {
+		if(cusotmers[0] === undefined){
+			res.json({
+				"messages": [
+					{"text": "You are not allowed"}
+				]
+			})
+		}else{
+			fuel.find({Name}, (err, result) => {
+				if(result){
+					res.json({
+						"messages": [
+							{"text": `Octane price is ${result[0].price}`}
+						]
+					})
+				}
+			})
+		}
+	})
+})
 module.exports = router;
