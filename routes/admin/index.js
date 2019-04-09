@@ -239,7 +239,37 @@ router.post('/update-fuel', function(req,res) {
     }
   })
   
+rotuer.post('/check-debt', function(req, res) {
+  let name = req.body.name;
+  let messengerId = req.body["messenger user id"];
 
+  AdminMessenger.find({messengerId}, function(err, admin){
+    if(admin[0]=== undefined){
+      res.json({
+        "messages": [
+        {"text": "You are not allowed"}
+        ]
+      })
+    }else{
+      supplier.find({name: {$regex: name}}, function(err, supplier) {
+        if(supplier[0] === undefined){
+          res.json({
+            "messages": [
+              {"text": "Supplier not found"}
+              ]
+              })
+        }else{
+          res.json({
+            "messages": [
+            {"text": `Name:${supplier[0].name}\nDebt: ${supplier[0].debt}`}
+            ]
+          })
+        }
+      })
+    }
+  })
+
+})
   
 })
 module.exports = router;
