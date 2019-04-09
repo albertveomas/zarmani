@@ -138,14 +138,16 @@ router.post('/give-point', function(req,res){
 				]
 			})
 		}else{
-			member.updateOne({memberId}, {$set:{point}}, function(err, points) {
-				if(points){
-					res.json({
-						"messages": [
-							{"text": "Point Updated"}
-						]
-					})
-				}
+			member.find({memberId}, function(err, members){
+				member.updateOne({memberId}, {$set:{point: members[0].point+point}}, function(err, points) {
+					if(points){
+						res.json({
+							"messages": [
+								{"text": "Point Updated"}
+							]
+						})
+					}
+				})
 			})
 		}
 	})
