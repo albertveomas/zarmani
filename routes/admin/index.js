@@ -243,6 +243,7 @@ router.post('/check-debt', function(req, res) {
   let name = req.body.name;
   let messengerId = req.body["messenger user id"];
 
+  console.log(`Name is ${name}, messenger ${messengerId}`)
 
   AdminMessenger.find({messengerId}, function(err, admin){
     if(admin[0]=== undefined){
@@ -252,6 +253,7 @@ router.post('/check-debt', function(req, res) {
         ]
       })
     }else{
+      console.log(`Allowed`)
       supplier.find({name: {$regex: name}}, function(err, supplier) {
         console.log(`Supplier is ${supplier}`)
         if(supplier[0] === undefined){
