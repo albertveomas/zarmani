@@ -252,6 +252,7 @@ rotuer.post('/check-debt', function(req, res) {
       })
     }else{
       supplier.find({name: {$regex: name}}, function(err, supplier) {
+        console.log(`Supplier is ${supplier}`)
         if(supplier[0] === undefined){
           res.json({
             "messages": [
