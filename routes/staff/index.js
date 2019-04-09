@@ -5,7 +5,7 @@ var Staff = require('../../schema/StaffCreate');
 var StaffMessenger = require('../../schema/Staff');
 var Assign = require('../../schema/Assign');
 var customer = require('../../schema/Customer');
-var member = require('../../schema/Member');
+var Member = require('../../schema/Member');
 
 // define the home page route
 router.post('/create-member', function (req, res) {
@@ -112,7 +112,7 @@ router.post('/check-point', function(req, res) {
 		if(member[0] === undefined){
 			res.json({
 				"messages": [
-					{"text": `Memmber not found`}
+					{"text": `Member not found`}
 				]
 			})
 		}else{
@@ -138,8 +138,8 @@ router.post('/give-point', function(req,res){
 				]
 			})
 		}else{
-			member.find({memberId}, function(err, members){
-				member.updateOne({memberId}, {$set:{point: members[0].point+point}}, function(err, points) {
+			Member.find({memberId}, function(err, members){
+				Member.updateOne({memberId}, {$set:{point: members[0].point+point}}, function(err, points) {
 					if(points){
 						res.json({
 							"messages": [
