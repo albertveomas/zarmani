@@ -139,16 +139,10 @@ router.post('/give-point', function(req,res){
 				]
 			})
 		}else{
-			console.log(`Customer is ${customers}`);
+			console.log(`allowed`);
 			Member.updateOne({memberId}, {$set: {point}, function(err, members){
 				console.log(`Memebers is ${members}`);
-				if(members){
-					res.json({
-						"messages": [
-							{"text": `Point Updated`}
-						]
-					})
-				}
+			
 			}})
 		}
 	})
