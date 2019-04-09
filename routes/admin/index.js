@@ -273,7 +273,7 @@ router.post('/check-debt', (req, res) => {
         }else{
           res.json({
             "messages": [
-              {"text": `Name: ${suppliers[0].name}\n Debt:${suppliers[0].debt} \n Date: ${suppliers[0].date}`}
+              {"text": `Name: ${suppliers[0].name}\n Debt:${suppliers[0].debt} \n Date: ${suppliers[0].date.toDateString()}`}
             ]
           })
         }
