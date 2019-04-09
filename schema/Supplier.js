@@ -9,6 +9,10 @@ const supplier = new Schema({
     name: {
         type: String,
         required: true
+    },
+    debt: {
+    	type: Number,
+    	required: true
     }
 })
 

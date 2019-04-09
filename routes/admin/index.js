@@ -107,10 +107,20 @@ router.post('/pump-register', function(req,res) {
 router.post('/supplier-register', function(req,res) {
   let name = (req.body.name).toLowerCase();
   let phone = req.body.phone;
+  let messengerId = req.body["messenger user id"];
+  let debt = req.body.debt;
 
-  supplier.find({name}, function(err, suppliers){
+  AdminMessenger.find({messengerId}, function(err, admin) {
+    if(admin[0] === undefined){
+      res.json({
+        "messages": [
+        {"text": "You are not allowed"}
+        ]
+      })
+    }else{
+        supplier.find({name}, function(err, suppliers){
     if(suppliers[0] === undefined){
-      supplier.create({name,phone}, function(err, result){
+      supplier.create({name,phone,debt}, function(err, result){
         res.json({
           "messages": [
           {"text": `Supplier Name ${name} is registered Successfully`}
@@ -125,6 +135,9 @@ router.post('/supplier-register', function(req,res) {
       })
     }
   })
+    }
+  })
+
 })
 
 router.post('/assign', function(req, res){
