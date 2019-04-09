@@ -8,6 +8,7 @@ var pump = require('../../schema/Pump');
 var supplier = require('../../schema/Supplier');
 var assgin = require('../../schema/Assign');
 var fuel = require('../../schema/Fuel');
+var gift = require('../../schema/Gift');
 
 
 // define the home page route
@@ -328,5 +329,40 @@ router.post('/edit-debt', function(req, res) {
     }
   })
   
+})
+
+router.post('/gift-reg', function(req, res) {
+	let Name = req.body.name.toLowerCase();
+	let point = req.body.point;
+	let messengerId = req.body["messenger user id"];
+
+  AdminMessenger.find({messengerId}, function(error, admin){
+    if(admin[0] === undefined){
+      res.json({
+        "messages": [
+          {"text": "You are not allowed"}
+        ]
+      })
+    }else{
+      gift.find({Name}, function(err, found){
+        if(found[0] === undefined){
+          gift.create({Name,point}, function(err, result){
+            res.json({
+              "messages": [
+                {"text": "Gift added"}
+              ]
+            })
+          })
+        }else{
+          res.json({
+            "messages": [
+              {"text": "Gift already existed"}
+            ]
+          })
+        }
+      })
+    }
+  })
+	
 })
 module.exports = router;
