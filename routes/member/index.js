@@ -53,7 +53,7 @@ router.post('/fuel-price/octane', function(req, res) {
 	console.log(`Messenger id is ${messengerId}`)
 	console.log(`Fuel is ${Name}`)
 	customer.find({messengerId}, function(err, customers) {
-		if(cusotmers[0] === undefined){
+		if(customers[0] === undefined){
 			res.json({
 				"messages": [
 					{"text": "You are not allowed"}
