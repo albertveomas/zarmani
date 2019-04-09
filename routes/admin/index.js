@@ -240,4 +240,10 @@ router.post('/update-fuel', function(req,res) {
   })
  }) 
 
+router.post('/check-debt', (req, res) => {
+  let name = req.body.name;
+  let messengerId = req.body["messenger user id"];
+
+  console.log(`name is${name}`)
+})
 module.exports = router;
