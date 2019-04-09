@@ -49,9 +49,6 @@ router.post('/register', function (req, res) {
 router.post('/fuel-price/octane', function(req, res) {
 	let messengerId = req.body["messenger user id"];
 	let Name = req.body.octane;
-
-	console.log(`Messenger id is ${messengerId}`)
-	console.log(`Fuel is ${Name}`)
 	customer.find({messengerId}, function(err, customers) {
 		if(customers[0] === undefined){
 			res.json({
@@ -65,6 +62,54 @@ router.post('/fuel-price/octane', function(req, res) {
 					res.json({
 						"messages": [
 							{"text": `Octane price is ${result[0].price}`}
+						]
+					})
+				}
+			})
+		}
+	})
+})
+
+router.post('/fuel-price/disel', function(req, res) {
+	let messengerId = req.body["messenger user id"];
+	let Name = req.body.disel;
+	customer.find({messengerId}, function(err, customers) {
+		if(customers[0] === undefined){
+			res.json({
+				"messages": [
+					{"text": "You are not allowed"}
+				]
+			})
+		}else{
+			fuel.find({Name}, (err, result) => {
+				if(result){
+					res.json({
+						"messages": [
+							{"text": `Disel price is ${result[0].price}`}
+						]
+					})
+				}
+			})
+		}
+	})
+})
+
+router.post('/fuel-price/premimum', function(req, res) {
+	let messengerId = req.body["messenger user id"];
+	let Name = req.body.premimum;
+	customer.find({messengerId}, function(err, customers) {
+		if(customers[0] === undefined){
+			res.json({
+				"messages": [
+					{"text": "You are not allowed"}
+				]
+			})
+		}else{
+			fuel.find({Name}, (err, result) => {
+				if(result){
+					res.json({
+						"messages": [
+							{"text": `Premimum price is ${result[0].price}`}
 						]
 					})
 				}
