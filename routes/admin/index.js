@@ -105,7 +105,7 @@ router.post('/pump-register', function(req,res) {
 })
 
 router.post('/supplier-register', function(req,res) {
-  let name = req.body.name;
+  let name = (req.body.name).toLowerCase();
   let phone = req.body.phone;
 
   supplier.find({name}, function(err, suppliers){
