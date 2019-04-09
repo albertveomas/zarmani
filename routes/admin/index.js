@@ -263,7 +263,7 @@ router.post('/check-debt', (req, res) => {
         ]
       })
     }else{
-      supplier.find({name: {$regex: name}}, function(err, suppliers) {
+      supplier.find({name}, function(err, suppliers) {
         if(suppliers[0] === undefined){
           res.json({
             "messages": [
@@ -275,6 +275,53 @@ router.post('/check-debt', (req, res) => {
             "messages": [
               {"text": `Name: ${suppliers[0].name}\n Debt:${suppliers[0].debt} \n Date: ${suppliers[0].date.toDateString()}`}
             ]
+          })
+        }
+      })
+    }
+  })
+  
+})
+
+
+router.post('/edit-debt', function(req, res) {
+  let name = req.body.name;
+  let messengerId = req.body["messenger user id"];
+  let debt = req.body.amount;
+  let date = new Date(req.body.date);
+
+  if(date == 'Invalid Date'){
+    res.json({
+      "messages": [
+        {"text": "Date format is invalid"}
+      ]
+    })
+  }
+  
+  AdminMessenger.find({messengerId}, function(err, admin) {
+    if(admin[0] === undefined){
+      res.json({
+        "messages": [
+          {"text": "You are not allowed"}
+        ]
+      })
+    }else{
+      supplier.find({name}, function(err, suppliers) {
+        if(suppliers[0] === undefined){
+          res.json({
+            "messages": [
+              {"text": "Supplier is not found"}
+            ]
+          })
+        }else{
+          supplier.updateOne({name}, {$set:{debt,date}}, function(err, result){
+            if(result){
+              res.json({
+                "messages": [
+                  {"text": `Debt amount ${result[0].debt} is updated`}
+                ]
+              })
+            }
           })
         }
       })
