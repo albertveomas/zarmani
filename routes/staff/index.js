@@ -131,7 +131,7 @@ router.post('/give-point', function(req,res){
 	let liter = req.body.liter;
 	let point = liter/10;
 	let messengerId = req.body["messenger user id"];
-	console.log(`MemberID is ${memberId}`);
+	console.log(`MemberID is ${point} and ${typeof point}`);
 	customer.find({messengerId}, function(err, customers) {
 		if(customers[0] === undefined){
 			res.json({
