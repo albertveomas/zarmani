@@ -130,6 +130,8 @@ router.post('/give-point', function(req,res){
 	let memberID = req.body.id;
 	let liter = req.body.liter;
 	let point = liter/10;
+
+	console.log(`point is ${point}`);
 	let messengerId = req.body["messenger user id"];
 	customer.find({messengerId}, function(err, customers) {
 		if(customers[0] === undefined){
