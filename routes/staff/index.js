@@ -140,6 +140,7 @@ router.post('/give-point', function(req,res){
 			})
 		}else{
 			sale.find({memberId}, function(err, members){
+				
 				if(members[0] === undefined){
 					sale.create({memberId,point,date}, function(err, sales){
 						console.log(sales);
@@ -152,8 +153,12 @@ router.post('/give-point', function(req,res){
 						}
 					})
 				}else{
-					sale.updateOne({memberId}, {$set: {point,date}}, (err, sales) =>{
-						console.log(sales);
+					sale.updateOne({memberId}, {$set: {point:members[0].point+point,date}}, (err, sales) =>{
+						res.json({
+							"messages": [
+								{"text": `The points of memberID ${memberId} is now ${members[0].point+point} `}
+							]
+						})
 					})
 				}
 			})
