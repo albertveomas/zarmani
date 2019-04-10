@@ -217,10 +217,11 @@ router.post('/staff/view-debt', function(req, res) {
 	let memberId = req.body.ID;
 
 	debt.find({memberId}, function(err, debts){
+		console.log(`Member are ${debts}`)
 		if(debts[0] === undefined){
 			res.json({
 				"messages": [
-				{"text": "You are not allowed"}
+				{"text": "Member Not found"}
 				]
 			})
 		}else{
