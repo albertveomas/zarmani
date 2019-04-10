@@ -7,6 +7,7 @@ var Assign = require('../../schema/Assign');
 var customer = require('../../schema/Customer');
 var Member = require('../../schema/Member');
 var sale = require('../../schema/sale');
+var gift = require('../../schema/Gift');
 var giftReceived = require('../../schema/gitReceived');
 
 // define the home page route
