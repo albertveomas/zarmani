@@ -152,8 +152,8 @@ router.post('/give-point', function(req,res){
 						}
 					})
 				}else{
-					sale.find({memberId}, function(err, resu) {
-						console.log(`Resu is ${resu}`)
+					sale.updateOne({memberId}, {$set: {point,date}}, (err, sales) =>{
+						console.log(sales);
 					})
 				}
 			})
