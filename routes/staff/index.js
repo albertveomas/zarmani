@@ -169,74 +169,7 @@ router.post('/give-point', function(req,res){
 
 })
 
-router.post('/give-gift', function(req, res){
-	let messengerId = req.body["messenger user id"];
-	let gift = (req.body.gift).toLowerCase();
-	let code = req.body.code;
-	let memberId = req.body.id;
 
-	StaffMessenger.find({messengerId}, function(err, staffs){
-		if(staffs[0] === undefined){
-			res.json({
-				"messages": [
-					{"text": "You are not allowed"}
-				]
-			})
-		}else{
-			Gift.find({Name:gift}, function(err, gifts){
-				if(gifts[0] === undefined){
-					res.json({
-						"messages": [
-							{"text": "Gift not found"}
-						]
-					})
-				}else{
-					Member.find({memberId,code}, function(err, members){
-						if(members[0] === undefined){
-							res.json({
-								"messages": [
-									{"text": `Cannot find with ${memberId} with the code ${code}. Please check them again`}
-								]
-							})
-						}else{
-							sale.find({memberId}, function(err, sales){
-								giftReceived.find({memberId}, function(err, receive){
-									if(sales[0].point > gifts[0].point){
-										if(receive[0] === undefined){
-											// add
-											giftReceived.create({memberId,gift:[{name:gifts[0].Name,qty:1}]}, function(err, correct){
-												if(correct){
-													res.json({
-														"messages": [
-															{"text": "Gift is received now"}
-														]
-													})
-												}
-											})
-										
-										}else{
-											console.log(`Console.log ${receive}`)
-											// update [id:123123, array: [{name,qty}, {name,qty}]]
-											// array for each, array room ka name ko find, find lo twe yin update
-											
-										}
-									}else{
-										res.json({
-											"messages": [
-												{"text": "Your point is lower than gift point"}
-											]
-										})
-									}
-								})
-							})
-						}
-					})
-				}
-			})
-		}
-	})
-
-})
 
 
 module.exports = router;
