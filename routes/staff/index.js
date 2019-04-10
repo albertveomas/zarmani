@@ -129,7 +129,7 @@ router.post('/give-point', function(req,res){
 	let messengerId = req.body["messenger user id"];
 	let point = (req.body.liter)/10;
 	let memberId = req.body.id;
-	let Date = new Date();
+	let date = new Date();
 
 	customer.find({messengerId}, function(err, customers){
 		if(customers[0]===undefined){
@@ -141,7 +141,7 @@ router.post('/give-point', function(req,res){
 		}else{
 			sale.find({memberId}, function(err, members){
 				if(members[0] === undefined){
-					sale.create({memberId,point,Date}, function(err, sales){
+					sale.create({memberId,point,date}, function(err, sales){
 						console.log(sales);
 						if(sales){
 							res.json({
