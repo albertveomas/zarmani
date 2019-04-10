@@ -200,10 +200,10 @@ router.post('/give-gift', function(req, res){
 							})
 						}else{
 							sale.find({memberId}, function(err, sales){
-								if(sales[0].point > gifts[0].point){
-									sale.updateOne({memberId}, {$set: {point:sales[0].point-gifts[0].point}}, function(err, result){
-										
-										if(result){
+								giftReceived.find({memberId}, function(err, receive){
+									if(sales[0].point > gifts[0].point){
+										if(receive[0] === undefined){
+											// add
 											giftReceived.create({memberId,gift:[{name:gifts[0].Name,qty:1}]}, function(err, correct){
 												if(correct){
 													res.json({
@@ -213,15 +213,25 @@ router.post('/give-gift', function(req, res){
 													})
 												}
 											})
+										
+										}else{
+											
+											// update [id:123123, array: [{name,qty}, {name,qty}]]
+											// array for each, array room ka name ko find, find lo twe yin update
+											receive[0].forEach((current,index,arr) => {
+												if(current.name.include(gift)){
+													console.log(`Current is ${current}`);
+												}
+											})
 										}
-									})
-								}else{
-									res.json({
-										"messages": [
-											{"text": "Your point is lower than gift point"}
-										]
-									})
-								}
+									}else{
+										res.json({
+											"messages": [
+												{"text": "Your point is lower than gift point"}
+											]
+										})
+									}
+								})
 							})
 						}
 					})
