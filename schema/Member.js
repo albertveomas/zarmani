@@ -14,10 +14,6 @@ const member = new Schema({
         type:String,
         required: true
     },
-    point:{
-        type:Number,
-        required: true
-    },
     memberConfirm: {
     	type: Boolean,
     	required: true

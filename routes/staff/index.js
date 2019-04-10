@@ -6,6 +6,7 @@ var StaffMessenger = require('../../schema/Staff');
 var Assign = require('../../schema/Assign');
 var customer = require('../../schema/Customer');
 var Member = require('../../schema/Member');
+var sale = require('../../schema/sale');
 
 // define the home page route
 router.post('/create-member', function (req, res) {
@@ -13,12 +14,11 @@ router.post('/create-member', function (req, res) {
   let Name = req.body.name;
   let code = req.body.code;
   let memberConfirm = false;
-  let point = 0;
 
 
   Member.find({memberId}, function(err, member){
   	if(member[0] === undefined){
-  		Member.create({memberId,Name,code,memberConfirm,point}, function(err, result){
+  		Member.create({memberId,Name,code,memberConfirm}, function(err, result){
   			if(result){
   				console.log(result);
   				res.json({
@@ -108,7 +108,7 @@ router.post('/view-assign/', function(req, res) {
 router.post('/check-point', function(req, res) {
 	let memberId = req.body.ID;
 
-	Member.find({memberId}, function(err, member){
+	sale.find({memberId}, function(err, member){
 		if(member[0] === undefined){
 			res.json({
 				"messages": [
@@ -129,6 +129,7 @@ router.post('/give-point', function(req,res){
 	let messengerId = req.body["messenger user id"];
 	let point = (req.body.liter)/10;
 	let memberId = req.body.id;
+	let Date = new Date();
 
 	customer.find({messengerId}, function(err, customers){
 		if(customers[0]===undefined){
@@ -138,16 +139,21 @@ router.post('/give-point', function(req,res){
 				]
 			})
 		}else{
-			Member.find({memberId}, function(err, members){
-				Member.updateOne({memberId}, {$set:{point: members[0].point+point}}, function(err, points) {
-					if(points){
-						res.json({
-							"messages": [
-								{"text": "Point Updated"}
-							]
-						})
-					}
-				})
+			sale.find({memberId}, function(err, members){
+				if(members[0] === undefined){
+					sale.create({memberId,point,Date}, function(err, sales){
+						console.log(sales);
+						if(sales){
+							res.json({
+								"messages": [
+									{"text": "Point added"}
+								]
+							})
+						}
+					})
+				}else{
+
+				}
 			})
 		}
 	})
