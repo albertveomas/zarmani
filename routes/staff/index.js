@@ -7,7 +7,7 @@ var Assign = require('../../schema/Assign');
 var customer = require('../../schema/Customer');
 var Member = require('../../schema/Member');
 var sale = require('../../schema/sale');
-var gift = require('../../schema/Gift');
+var Gift = require('../../schema/Gift');
 var giftReceived = require('../../schema/gitReceived');
 
 // define the home page route
@@ -183,7 +183,7 @@ router.post('/give-gift', function(req, res){
 				]
 			})
 		}else{
-			gift.find({Name:gift}, function(err, gifts){
+			Gift.find({Name:gift}, function(err, gifts){
 				if(gifts[0] === undefined){
 					res.json({
 						"messages": [
