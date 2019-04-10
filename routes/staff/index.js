@@ -8,6 +8,7 @@ var customer = require('../../schema/Customer');
 var Member = require('../../schema/Member');
 var sale = require('../../schema/sale');
 var Gift = require('../../schema/Gift');
+var debt = require('../../schema/debt');
 var giftReceived = require('../../schema/gitReceived');
 
 // define the home page route
@@ -172,8 +173,17 @@ router.post('/give-point', function(req,res){
 router.post('/edit-debt', function(req,res) {
 	let memberId = req.body.ID;
 	let amount = req.body.amount;
+	let messengerId = req.body["messenger user id"]
 
-	debt.find({memberId}, function(err, debts){
+	StaffMessenger.find({messengerId}, function(err, staff){
+		if(staff[0] === undefined){
+			res.json({
+				"messages": [
+				{"text": "You are not allowed"}
+				]
+			})
+		}else{
+				debt.find({memberId}, function(err, debts){
 		if(debts[0] === undefined){
 			debt.create({memberId,amount}, function(err, result){
 				if(result){
@@ -194,6 +204,8 @@ router.post('/edit-debt', function(req,res) {
 					})
 				}
 			})
+		}
+	})
 		}
 	})
 })
