@@ -7,6 +7,7 @@ var Assign = require('../../schema/Assign');
 var customer = require('../../schema/Customer');
 var Member = require('../../schema/Member');
 var sale = require('../../schema/sale');
+var giftReceived = require('../../schema/gitReceived');
 
 // define the home page route
 router.post('/create-member', function (req, res) {
@@ -167,6 +168,64 @@ router.post('/give-point', function(req,res){
 
 })
 
+router.post('/give-gift', function(req, res){
+	let messengerId = req.body["messenger user id"];
+	let gift = (req.body.gift).toLowerCase();
+	let code = req.body.code;
+	let memberId = req.body.id;
+
+	StaffMessenger.find({messengerId}, function(err, staffs){
+		if(staffs[0] === undefined){
+			res.json({
+				"messages": [
+					{"text": "You are not allowed"}
+				]
+			})
+		}else{
+			gift.find({Name:gift}, function(err, gifts){
+				if(gifts[0] === undefined){
+					res.json({
+						"messages": [
+							{"text": "Gift not found"}
+						]
+					})
+				}else{
+					Member.find({memberId,code}, function(err, members){
+						if(members[0] === undefined){
+							res.json({
+								"messages": [
+									{"text": `Cannot find with ${memberId} with the code ${code}. Please check them again`}
+								]
+							})
+						}else{
+							sale.find({memberId}, function(err, sales){
+								if(sales[0].point > gifts[0].point){
+
+								}else{
+									sale.updateOne({memberId}, {$set: {point:sales[0].point-gifts[0].point}}, function(err, result){
+										
+										if(result){
+											giftReceived.create({memberId,gift:[{name:gifts[0].Name,qty:1}]}, function(err, correct){
+												if(correct){
+													res.json({
+														"messages": [
+															{"text": "Gift is received now"}
+														]
+													})
+												}
+											})
+										}
+									})
+								}
+							})
+						}
+					})
+				}
+			})
+		}
+	})
+
+})
 
 
 module.exports = router;
