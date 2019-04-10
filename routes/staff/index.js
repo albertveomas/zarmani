@@ -200,10 +200,7 @@ router.post('/give-gift', function(req, res){
 							})
 						}else{
 							sale.find({memberId}, function(err, sales){
-								console.log(`Minus is sale - gift ${sales[0].point-gifts[0].point}`);
 								if(sales[0].point > gifts[0].point){
-
-								}else{
 									sale.updateOne({memberId}, {$set: {point:sales[0].point-gifts[0].point}}, function(err, result){
 										
 										if(result){
@@ -217,6 +214,12 @@ router.post('/give-gift', function(req, res){
 												}
 											})
 										}
+									})
+								}else{
+									res.json({
+										"messages": [
+											{"text": "Your point is lower than gift point"}
+										]
 									})
 								}
 							})
