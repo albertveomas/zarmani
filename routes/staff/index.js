@@ -146,7 +146,7 @@ router.post('/give-point', function(req,res){
 						if(sales){
 							res.json({
 								"messages": [
-									{"text": "Point added"}
+									{"text": `The points of memberID ${memberId} is now ${sales.point} `}
 								]
 							})
 						}
