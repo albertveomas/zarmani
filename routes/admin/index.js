@@ -9,6 +9,7 @@ var supplier = require('../../schema/Supplier');
 var assgin = require('../../schema/Assign');
 var fuel = require('../../schema/Fuel');
 var gift = require('../../schema/Gift');
+var debt = require('../..//schema/debt');
 
 
 // define the home page route
@@ -364,5 +365,25 @@ router.post('/gift-reg', function(req, res) {
     }
   })
 	
+})
+
+router.post('/view-debt', function(req, res) {
+  let memberId = req.body.ID;
+
+  debt.find({memberId}, function(err, debts){
+    if(debts[0] === undefined){
+      res.json({
+        "messages": [
+        {"text": "Member Not Found"}
+        ]
+      })
+    }else{
+      res.json({
+        "messages": [
+        {"text": `Member ID:${debts[0].memberId}\n Amount:${debts[0].amount}\npumpId:${debts[0].pumpId}\nStaff ID:${debts[0].staffId}\nDate${debts[0].date.toDateString()}`}
+        ]
+      })
+    }
+  })
 })
 module.exports = router;
