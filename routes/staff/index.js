@@ -238,7 +238,7 @@ router.post('/view-debt', function(req,res) {
 				}
 			})
 		}else{
-			debt.updateOne({memberId}, {$set: {amount,date}}, function(err, cor){
+			debt.updateOne({memberId}, {$set: {amount,date,pumpId,staffId:staff[0].staffId}}, function(err, cor){
 				if(cor){
 					res.json({
 						"messages": [
