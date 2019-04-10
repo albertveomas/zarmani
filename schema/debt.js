@@ -17,7 +17,7 @@ const debt = new Schema({
     staffId: {
         type: String,
         required: true
-    }
+    },
     date: {
         type: Date,
         required: true
