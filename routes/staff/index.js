@@ -216,6 +216,7 @@ router.post('/edit-debt', function(req,res) {
 router.post('/staff/view-debt', function(req, res) {
 	let memberId = req.body.ID;
 
+	console.log(`Messenger is ${memberId}`)
 	debt.find({memberId}, function(err, debts){
 		console.log(`Member are ${debts}`)
 		if(debts[0] === undefined){
