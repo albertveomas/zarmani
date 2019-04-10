@@ -152,18 +152,8 @@ router.post('/give-point', function(req,res){
 						}
 					})
 				}else{
-					sale.updateOne({memberId}, {$set:{point,date}}, function(err, result) {
-						console.log(`Resl is ${result[0]}`)
-						if(result){
-							res.json({
-								"messages": [
-									{"text": `The points of memberID ${memberId} is now ${result[0]} `}
-								]
-							})
-						}
-						
-					
-						
+					sale.find({memberId}, function(err, resu) {
+						console.log(`Resu is ${resu}`)
 					})
 				}
 			})
