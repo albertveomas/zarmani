@@ -173,7 +173,8 @@ router.post('/give-point', function(req,res){
 router.post('/edit-debt', function(req,res) {
 	let memberId = req.body.ID;
 	let amount = req.body.amount;
-	let messengerId = req.body["messenger user id"]
+	let messengerId = req.body["messenger user id"];
+	let date = new Date();
 
 	StaffMessenger.find({messengerId}, function(err, staff){
 		if(staff[0] === undefined){
@@ -185,7 +186,7 @@ router.post('/edit-debt', function(req,res) {
 		}else{
 				debt.find({memberId}, function(err, debts){
 		if(debts[0] === undefined){
-			debt.create({memberId,amount}, function(err, result){
+			debt.create({memberId,amount,date}, function(err, result){
 				if(result){
 					res.json({
 						"messages": [
@@ -195,7 +196,7 @@ router.post('/edit-debt', function(req,res) {
 				}
 			})
 		}else{
-			debt.updateOne({memberId}, {$set: {amount}}, function(err, cor){
+			debt.updateOne({memberId}, {$set: {amount,date}}, function(err, cor){
 				if(cor){
 					res.json({
 						"messages": [
