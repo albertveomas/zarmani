@@ -226,7 +226,7 @@ router.post('/staff/view-debt', function(req, res) {
 		}else{
 			res.json({
 				"messages": [
-				{"text": `Member ID:${debts[0].memberId}\n Amount:${debts[0].amount}\npumpmId:${debts[0].pumpId}\nStaff ID:${debts[0].staffId}\nDate${debts[0].date.toDateString()}`}
+				{"text": `Member ID:${debts[0].memberId}`}
 				]
 			})
 		}
