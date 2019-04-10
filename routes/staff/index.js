@@ -169,7 +169,7 @@ router.post('/give-point', function(req,res){
 
 })
 
-router.post('/debt', function(req,res) {
+router.post('/edit-debt', function(req,res) {
 	let memberId = req.body.ID;
 	let amount = req.body.amount;
 
