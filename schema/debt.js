@@ -10,6 +10,14 @@ const debt = new Schema({
         type: String,
         required: true
     },
+    pumpId: {
+        type: Number,
+        required: true
+    },
+    staffId: {
+        type: String,
+        required: true
+    }
     date: {
         type: Date,
         required: true

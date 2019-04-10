@@ -211,5 +211,45 @@ router.post('/edit-debt', function(req,res) {
 	})
 })
 
+router.post('/view-debt', function(req,res) {
+	let memberId = req.body.ID;
+	let amount = req.body.amount;
+	let messengerId = req.body["messenger user id"];
+	let pumpId = req.body.id;
+	let date = new Date();
 
+	StaffMessenger.find({messengerId}, function(err, staff){
+		if(staff[0] === undefined){
+			res.json({
+				"messages": [
+				{"text": "You are not allowed"}
+				]
+			})
+		}else{
+				debt.find({memberId}, function(err, debts){
+		if(debts[0] === undefined){
+			debt.create({memberId,amount,date,pumpId,staffId:staff[0].staffId}, function(err, result){
+				if(result){
+					res.json({
+						"messages": [
+						{"text": `The Debt of Member ID ${memberId} is ${amount}`}
+						]
+					})
+				}
+			})
+		}else{
+			debt.updateOne({memberId}, {$set: {amount,date}}, function(err, cor){
+				if(cor){
+					res.json({
+						"messages": [
+						{"text": `Debt is ${amount}`}
+						]
+					})
+				}
+			})
+		}
+	})
+		}
+	})
+})
 module.exports = router;
