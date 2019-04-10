@@ -169,7 +169,34 @@ router.post('/give-point', function(req,res){
 
 })
 
+router.post('/debt', function(req,res) {
+	let memberId = req.body.ID;
+	let amount = req.body.amount;
 
+	debt.find({memberId}, function(err, debts){
+		if(debts[0] === undefined){
+			debt.create({memberId,amount}, function(err, result){
+				if(result){
+					res.json({
+						"messages": [
+						{"text": `The Debt of Member ID ${memberId} is ${amount}`}
+						]
+					})
+				}
+			})
+		}else{
+			debt.updateOne({memberId}, {$set: {amount}}, function(err, cor){
+				if(cor){
+					res.json({
+						"messages": [
+						{"text": `Debt is ${amount}`}
+						]
+					})
+				}
+			})
+		}
+	})
+})
 
 
 module.exports = router;
