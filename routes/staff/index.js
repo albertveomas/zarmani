@@ -215,14 +215,10 @@ router.post('/give-gift', function(req, res){
 											})
 										
 										}else{
-											
+											console.log(`Console.log ${receive}`)
 											// update [id:123123, array: [{name,qty}, {name,qty}]]
 											// array for each, array room ka name ko find, find lo twe yin update
-											receive[0].forEach((current,index,arr) => {
-												if(current.name.include(gift)){
-													console.log(`Current is ${current}`);
-												}
-											})
+											
 										}
 									}else{
 										res.json({
