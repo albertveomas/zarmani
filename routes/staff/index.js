@@ -200,6 +200,7 @@ router.post('/give-gift', function(req, res){
 							})
 						}else{
 							sale.find({memberId}, function(err, sales){
+								console.log(`Minus is sale - gift ${sales[0].point-gifts[0].point}`);
 								if(sales[0].point > gifts[0].point){
 
 								}else{
