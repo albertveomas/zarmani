@@ -146,18 +146,16 @@ router.post('/give-point', function(req,res){
 						if(sales){
 							res.json({
 								"messages": [
-									{"text": `The points of memberID ${memberId} is now ${sales.point} `}
+									{"text": `The points of memberID ${memberId} is now ${sales[0].point} `}
 								]
 							})
 						}
 					})
 				}else{
 					sale.updateOne({memberId}, {$set:{point,Date}}, function(err, result) {
-						res.json({
-							"messages": [
-								{"text": `The points of memberID ${memberId} is now ${result.point} `}
-							]
-						})
+						console.log(`result is ${result}`)
+						console.log(`point is ${result[0].point}`)
+						
 					})
 				}
 			})
