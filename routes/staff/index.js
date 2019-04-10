@@ -213,22 +213,20 @@ router.post('/edit-debt', function(req,res) {
 	})
 })
 
-router.post('/staff/view-debt', function(req, res) {
+router.post('/view-debt', function(req, res) {
 	let memberId = req.body.ID;
-
-	console.log(`Messenger is ${memberId}`)
+	
 	debt.find({memberId}, function(err, debts){
-		console.log(`Member are ${debts}`)
 		if(debts[0] === undefined){
 			res.json({
 				"messages": [
-				{"text": "Member Not found"}
+				{"text": "Member Not Found"}
 				]
 			})
 		}else{
 			res.json({
 				"messages": [
-				{"text": `Member ID:${debts[0].memberId}`}
+				{"text": `Member ID:${debts[0].memberId}\n Amount:${debts[0].amount}\npumpmId:${debts[0].pumpId}\nStaff ID:${debts[0].staffId}\nDate${debts[0].date.toDateString()}`}
 				]
 			})
 		}
