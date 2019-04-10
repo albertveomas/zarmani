@@ -213,23 +213,19 @@ router.post('/edit-debt', function(req,res) {
 	})
 })
 
-// router.post('/staff/view-debt', function(req, res) {
-// 	let memberId = req.body.id;
+router.post('/staff/view-debt', function(req, res) {
+	let memberId = req.body.id;
 
-// 	debt.find({memberId}, function(err, debts){
-// 		if(debts[0] === undefined){
-// 			res.json({
-// 				"messages": [
-// 				{"text": "You are not allowed"}
-// 				]
-// 			})
-// 		}else{
-// 			res.json({
-// 				"messages": [
-// 				{"text": `Member ID:${debts[0].memberId}\n Amount:${debts[0].amount}\npumpmId:${debts[0].pumpId\n}Staff ID:${debts[0].staffId}\nDate${debts[0].date.toDateString()}`}
-// 				]
-// 			})
-// 		}
-// 	})
-// })
+	debt.find({memberId}, function(err, debts){
+		if(debts[0] === undefined){
+			res.json({
+				"messages": [
+				{"text": "You are not allowed"}
+				]
+			})
+		}else{
+			console.log(`view debt ${debts[0]}`);
+		}
+	})
+})
 module.exports = router;
