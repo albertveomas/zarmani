@@ -69,7 +69,7 @@ router.post('/register', function (req, res) {
                 ]
               })
             }else{
-              AdminMessenger.create({messengerId, adminId, used:false}, function(err, result){
+              AdminMessenger.create({messengerId, adminId, used:true}, function(err, result){
                 if(result[0]){
                   res.json({
                     "messages": [
