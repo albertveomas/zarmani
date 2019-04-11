@@ -255,10 +255,32 @@ router.post('/give-gift', function(req, res) {
 						]
 					})
 				}else{
-					console.log(`Members are ${members}`)
-					console.log(`Code is ${members.code}`)
-					if(code == members.code){
-						console.log('right')
+					if(code == members[0].code){
+						gift.find({name}, function(err, gifts){
+							if(gifts[0] === undefined){
+								res.json({
+									"messages": [
+										{"text": "Gift name is wrong"}
+									]						
+								})
+							}else{
+								sale.find({memberId}, function(err, results){
+									if(results[0].point > gifts[0].point){
+										res.json({
+											"messages": [
+												{"text": "Point ok"}
+											]
+										})
+									}else{
+										res.json({
+											"messages": [
+												{"text": `Point ${gift[0].point - results[0].points} is left to have ${results[0].name}`}
+											]
+										})
+									}
+								})
+							}
+						})
 					}else{
 						console.log('wrong')
 					}
