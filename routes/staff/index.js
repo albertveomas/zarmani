@@ -235,7 +235,7 @@ router.post('/view-debt', function(req, res) {
 
 router.post('/give-gift', function(req, res) {
 	let memberId = req.body.id;
-	let gift = req.body.gift;
+	let Name = req.body.gift;
 	let code = req.body.code;
 	let messengerId = req.body["messenger user id"];
 
@@ -256,7 +256,7 @@ router.post('/give-gift', function(req, res) {
 					})
 				}else{
 					if(code == members[0].code){
-						Gift.find({name}, function(err, gifts){
+						Gift.find({Name}, function(err, gifts){
 							if(gifts[0] === undefined){
 								res.json({
 									"messages": [
