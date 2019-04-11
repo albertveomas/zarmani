@@ -280,7 +280,7 @@ router.post('/give-gift', function(req, res) {
 									}else{
 										res.json({
 											"messages": [
-												{"text": `Point ${gifts[0].point - results[0].points} is left to have ${results[0].name}`}
+												{"text": `Point ${gifts[0].point - results[0].point} is left to have ${results[0].name}`}
 											]
 										})
 									}
