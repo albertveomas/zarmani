@@ -49,7 +49,9 @@ router.post('/register', function (req, res) {
   let adminId = req.body.id;
   let code = req.body.code;
 
-  AdminMessenger({messengerId}, function(err, admin){
+  console.log(`Messenger is ${messengerId}, adminId is ${adminId}, code is ${code}`)
+
+  AdminMessenger.find({messengerId}, function(err, admin){
     if(admin[0] === undefined){
       res.json({
         "messages": [
