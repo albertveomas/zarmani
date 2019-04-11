@@ -239,7 +239,7 @@ router.post('/give-gift', function(req, res) {
 	let code = req.body.code;
 	let messengerId = req.body["messenger user id"];
 
-	staff.find({messengerId}, function(err, staffs){
+	StaffMessenger.find({messengerId}, function(err, staffs){
 		if(staffs[0] === undefined){
 			res.json({
 				"messages": [
