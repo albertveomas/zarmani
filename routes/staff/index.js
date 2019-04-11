@@ -267,7 +267,7 @@ router.post('/give-gift', function(req, res) {
 								sale.find({memberId}, function(err, results){
 									if(results[0].point > gifts[0].point){
 										sale.updateOne({memberId}, {$set:{point:results[0].point-gifts[0].point}}, function(err, update){
-											giftReceived.create({memberId, gift}, function(err, received) {
+											giftReceived.create({memberId, gift:Name}, function(err, received) {
 												if(received){
 													res.json({
 														"messages": [
