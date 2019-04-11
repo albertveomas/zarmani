@@ -256,7 +256,7 @@ router.post('/give-gift', function(req, res) {
 					})
 				}else{
 					if(code == members[0].code){
-						gift.find({name}, function(err, gifts){
+						Gift.find({name}, function(err, gifts){
 							if(gifts[0] === undefined){
 								res.json({
 									"messages": [
