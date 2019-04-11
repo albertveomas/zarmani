@@ -66,15 +66,17 @@ router.post('/register', function (req, res) {
               {"text": "Admin Id is not found"}
             ]
           })
+        }else{
+          res.json({
+            "messages": [
+              {
+                "text": "Admin Register Success"
+              }
+            ],
+            "redirect_to_blocks": ["Admin"]
+          })
         }
-        res.json({
-          "messages": [
-            {
-              "text": "Admin Register Success"
-            }
-          ],
-          "redirect_to_blocks": ["Admin"]
-        })
+       
       })
     }
   })
