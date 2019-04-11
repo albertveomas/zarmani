@@ -49,38 +49,22 @@ router.post('/register', function (req, res) {
   let adminId = req.body.id;
   let code = req.body.code;
 
-  Admin.find({adminId}, function(error, result) {
-    if(result[0] === undefined){
+  AdminMessenger({messengerId}, function(err, admin){
+    if(admin[0] === undefined){
       res.json({
         "messages": [
-          {"text": "Admin ID is not found to register to other admin "}
+          {"text": "Admin Only can regsiter Other Admin Acc"}
         ]
       })
     }else{
-      if(code === result[0].code && result[0].used === false){
-        Admin.updateOne({adminId}, {$set: {used: true}}, function(err, update){
-          if(update){
-            AdminMessenger.create({messengerId,adminId}, function(err, admins){
-              if(admins){
-                res.json({
-                  "messages": [
-                  {"text": "Complete member registration for Admin"}
-                  ]
-                })
-              }
-            })
-          }
-        })
-      }else{
-        res.json({
-          "messages": [
-          {"text": "The Enter Code is Wrong or you are already registered"},
-          {"text": "Please ask database admin"}
-          ]
-        })
-      }
+      res.json({
+        "messages": [
+          {"text": "Ok"}
+        ]
+      })
     }
   })
+
 })
 
 router.post('/pump-register', function(req,res) {
