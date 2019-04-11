@@ -68,6 +68,11 @@ router.post('/register', function (req, res) {
           })
         }
         res.json({
+          "messages": [
+            {
+              "text": "Admin Register Success"
+            }
+          ],
           "redirect_to_blocks": ["Admin"]
         })
       })
