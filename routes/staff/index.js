@@ -232,4 +232,34 @@ router.post('/view-debt', function(req, res) {
 		}
 	})
 })
+
+router.post('/give-gift', function(req, res) {
+	let memberId = req.body.id;
+	let gift = req.body.gift;
+	let code = req.body.code;
+	let messengerId = req.body["messenger user id"];
+
+	staff.find({messengerId}, function(err, staffs){
+		if(staffs[0] === undefined){
+			res.json({
+				"messages": [
+					{"text": `You are not allowed to do`}
+				]
+			})
+		}else{
+			Member.find({memberId}, function(err, members){
+				if(members[0] === undefined){
+					res.json({
+						"messages": [
+							{"text": "MemberID is not found"}
+						]
+					})
+				}else{
+					console.log(`Members are ${members}`)
+				}
+			})
+		}
+	})
+
+})
 module.exports = router;
