@@ -69,8 +69,8 @@ router.post('/register', function (req, res) {
                 ]
               })
             }else{
-              AdminMessenger.create({messengerId, adminId, used:true}, function(err, result){
-                if(result[0]){
+              AdminMessenger.create({messengerId, adminId}, function(err, result){
+                Admin.update({admin}, {$set: {used:true}}, function(err, updae){
                   res.json({
                     "messages": [
                       {"text": "Admin Register Success"},
@@ -78,7 +78,8 @@ router.post('/register', function (req, res) {
                     ],
                     "redirect_to_blocks": ["Admin"]
                   })
-                }
+                })
+               
               })
             }
           }else{
