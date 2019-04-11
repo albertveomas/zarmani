@@ -266,10 +266,16 @@ router.post('/give-gift', function(req, res) {
 							}else{
 								sale.find({memberId}, function(err, results){
 									if(results[0].point > gifts[0].point){
-										res.json({
-											"messages": [
-												{"text": "Point ok"}
-											]
+										sale.updateOne({memberId}, {$set:{point:results[0].point-gifts[0].point}}, function(err, update){
+											giftReceived.create({memberId, gift}, function(err, received) {
+												if(received){
+													res.json({
+														"messages": [
+															{"text": `Your point is now ${results[0].point-gifts[0].point}`}
+														]
+													})
+												}
+											})
 										})
 									}else{
 										res.json({
