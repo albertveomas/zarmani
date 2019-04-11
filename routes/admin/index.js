@@ -53,7 +53,7 @@ router.post('/register', function (req, res) {
     if(result[0] === undefined){
       res.json({
         "messages": [
-          {"text": "admin not found"}
+          {"text": "Admin ID is not found to register to other admin "}
         ]
       })
     }else{
