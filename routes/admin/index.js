@@ -53,12 +53,6 @@ router.post('/register', function (req, res) {
 
   AdminMessenger.find({messengerId}, function(err, admin){
     if(admin[0] === undefined){
-      res.json({
-        "messages": [
-          {"text": "Admin Only can regsiter Other Admin Acc"}
-        ]
-      })
-    }else{
       Admin.find({adminId}, function(err, admins){
         if(admins[0] === undefined){
           res.json({
@@ -67,16 +61,33 @@ router.post('/register', function (req, res) {
             ]
           })
         }else{
-          res.json({
-            "messages": [
-              {
-                "text": "Admin Register Success"
+          if(admins[0].code === code){
+            AdminMessenger.create({messengerId, adminId}, function(err, result){
+              if(result[0]){
+                res.json({
+                  "messages": [
+                    {"text": "Admin Register Success"},
+                   
+                  ],
+                  "redirect_to_blocks": ["Admin"]
+                })
               }
-            ],
-            "redirect_to_blocks": ["Admin"]
-          })
+            })
+          }else{
+            res.json({
+              "messages": [
+                {"text": "Admin Code is wrong"}
+              ]
+            })
+          }
         }
        
+      })
+    }else{
+      res.json({
+        "messages": [
+          {"text": "Admin Already exists"}
+        ]
       })
     }
   })
