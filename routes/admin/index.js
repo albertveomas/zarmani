@@ -62,7 +62,7 @@ router.post('/register', function (req, res) {
           })
         }else{
           if(admins[0].code === code){
-            if(admin[0].used){
+            if(admins[0].used){
               res.json({
                 "messages": [
                   {"text": "this admin ID is used"}
