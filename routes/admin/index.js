@@ -59,10 +59,20 @@ router.post('/register', function (req, res) {
         ]
       })
     }else{
-      res.json({
-        "messages": [
-          {"text": "Ok"}
-        ]
+      Admin.find({adminId}, function(err, admins){
+        if(admins[0] === undefined){
+          res.json({
+            "messages": [
+              {"text": "Admin Id is not found"}
+            ]
+          })
+        }
+        res.json({
+          "messages": [
+            {"text": "Admin Register Success"},
+            {"redirect_to_blocks": ["Admin"]}
+          ]
+        })
       })
     }
   })
