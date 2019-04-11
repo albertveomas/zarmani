@@ -255,7 +255,7 @@ router.post('/give-gift', function(req, res) {
 						]
 					})
 				}else{
-					if(code === members.code){
+					if(code == members.code){
 						console.log('right')
 					}else{
 						console.log('wrong')
