@@ -62,17 +62,25 @@ router.post('/register', function (req, res) {
           })
         }else{
           if(admins[0].code === code){
-            AdminMessenger.create({messengerId, adminId}, function(err, result){
-              if(result[0]){
-                res.json({
-                  "messages": [
-                    {"text": "Admin Register Success"},
-                   
-                  ],
-                  "redirect_to_blocks": ["Admin"]
-                })
-              }
-            })
+            if(admin[0].used){
+              res.json({
+                "messages": [
+                  {"text": "this admin ID is used"}
+                ]
+              })
+            }else{
+              AdminMessenger.create({messengerId, adminId, used:false}, function(err, result){
+                if(result[0]){
+                  res.json({
+                    "messages": [
+                      {"text": "Admin Register Success"},
+                     
+                    ],
+                    "redirect_to_blocks": ["Admin"]
+                  })
+                }
+              })
+            }
           }else{
             res.json({
               "messages": [
@@ -86,7 +94,7 @@ router.post('/register', function (req, res) {
     }else{
       res.json({
         "messages": [
-          {"text": "Admin Already exists"}
+          {"text": "Admin Already exists with this messenger ID"}
         ]
       })
     }
