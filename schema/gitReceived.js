@@ -9,6 +9,10 @@ const giftReceived = new Schema({
     gift: {
         type: String,
         required: true
+    },
+    date: {
+        type: Date,
+        required: true
     }
 })
 

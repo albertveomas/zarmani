@@ -237,6 +237,7 @@ router.post('/give-gift', function(req, res) {
 	let memberId = req.body.id;
 	let Name = req.body.gift;
 	let code = req.body.code;
+	let date = new Date();
 	let messengerId = req.body["messenger user id"];
 
 	StaffMessenger.find({messengerId}, function(err, staffs){
@@ -267,7 +268,7 @@ router.post('/give-gift', function(req, res) {
 								sale.find({memberId}, function(err, results){
 									if(results[0].point >= gifts[0].point){
 										sale.updateOne({memberId}, {$set:{point:results[0].point-gifts[0].point}}, function(err, update){
-											giftReceived.create({memberId, gift:Name}, function(err, received) {
+											giftReceived.create({memberId, gift:Name,date}, function(err, received) {
 												if(received){
 													res.json({
 														"messages": [
@@ -296,4 +297,6 @@ router.post('/give-gift', function(req, res) {
 	})
 
 })
+
+
 module.exports = router;

@@ -5,7 +5,7 @@ var customer = require('../../schema/Customer');
 var member = require('../../schema/Member');
 var fuel = require('../../schema/Fuel');
 var debt = require('../../schema/debt');
-
+var receivedGift = require('../../schema/gitReceived');
 
 // define the home page route
 router.post('/register', function (req, res) {
@@ -134,6 +134,36 @@ router.post('/view-debt', function(req, res) {
 				"messages": [
 				{"text": `Member ID:${debts[0].memberId}\n Amount:${debts[0].amount}\npumpId:${debts[0].pumpId}\nStaff ID:${debts[0].staffId}\nDate${debts[0].date.toDateString()}`}
 				]
+			})
+		}
+	})
+})
+
+router.post('/view-receivedGift', function(req, res) {
+	let messengerId = req.body["messenger user id"];
+	
+	customer.find({messengerId}, function(err, customers){
+		if(customers[0]=== undefined) {
+			res.json({
+				"messages": [
+					{"text": "You are not allowed"}
+				]
+			})
+		}else{
+			receivedGift.find({memberId:customers[0].memberId}, function(err, gifts){
+				if(gifts[0] === undefined){
+					res.json({
+						"messages": [
+							{"text": "Gifts have not been accepted yet"}
+						]
+					})
+				}else{
+					res.json({
+						"messages": [
+							{"text": "Gifts found"}
+						]
+					})
+				}
 			})
 		}
 	})
