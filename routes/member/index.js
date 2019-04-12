@@ -161,9 +161,9 @@ router.post('/view-receivedGift', function(req, res) {
 						]
 					})
 				}else{
-					console.log(`${typeof gifts}, ${gifts}, ${gifts[1]}, ${gifts.length}`);
+					
 					gifts.forEach((current,i,arr)=> {
-						console.log(current);
+						console.log(`${current.gift} was received on ${current.date.toDateString()} ${current.date.toLocaleTimeString('en-US')}`);
 					})
 					// res.json({
 					// 	"messages": [
