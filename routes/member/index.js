@@ -162,7 +162,9 @@ router.post('/view-receivedGift', function(req, res) {
 					})
 				}else{
 					
-					console.log(gifts);
+					gifts.forEach((current, i, arr) => {
+						console.log(current);
+					})
 					// res.json({
 					// 	"messages": [
 					// 		for (let i = 0; i < array.length; i++) {
