@@ -161,9 +161,11 @@ router.post('/view-receivedGift', function(req, res) {
 						]
 					})
 				}else{
+					let [gift, date] = gifts[0];
+					console.log(gift, date);
 					res.json({
 						"messages": [
-							{"text": "Gifts found"}
+							{"text": "FOund"}
 						]
 					})
 				}
