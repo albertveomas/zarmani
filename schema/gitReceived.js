@@ -7,7 +7,7 @@ const giftReceived = new Schema({
         required: true
     },
     gift: {
-        type: Array,
+        type: String,
         required: true
     }
 })
