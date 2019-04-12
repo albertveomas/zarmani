@@ -13,6 +13,7 @@ router.post('/register', function (req, res) {
 	let memberId = req.body.id;
 	let code = req.body.code;
 
+	console.log(`code is ${code}`)
 	member.find({memberId}, function(error, result) {
 		if(result[0] === undefined){
 			res.json({
@@ -21,6 +22,7 @@ router.post('/register', function (req, res) {
 				]
 			})
 		}else{
+			console.log(`resul code ${result[0].code}`)
 			if(code == result[0].code && result[0].memberConfirm === false){
 				member.updateOne({memberId}, {$set: {memberConfirm: true}}, function(err, update){
 					if(update){
