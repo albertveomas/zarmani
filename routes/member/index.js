@@ -27,14 +27,7 @@ router.post('/register', function (req, res) {
 				member.updateOne({memberId}, {$set: {memberConfirm: true}}, function(err, update){
 					if(update){
 						customer.create({messengerId,memberId}, function(err, customers){
-							if(customers){
-								res.json({
-									"messages": [
-									{"text": "Complete member registration for customers"}
-									]
-									
-								})
-							}
+							console.log(customers);
 						})
 					}
 				})
