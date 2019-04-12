@@ -161,12 +161,18 @@ router.post('/view-receivedGift', function(req, res) {
 						]
 					})
 				}else{
-					console.log(`${typeof gifts}, ${gifts}`);
-					res.json({
-						"messages": [
-							{"text": "right"}
-						]
+					console.log(`${typeof gifts}, ${gifts}, ${gifts[1]}, ${gifts.length}`);
+					gifts.forEach((current,i,arr)=> {
+						console.log(current);
 					})
+					// res.json({
+					// 	"messages": [
+					// 		for (let i = 0; i < array.length; i++) {
+					// 			{"text": "aung"}
+								
+					// 		}
+					// 	]
+					// })
 				}
 			})
 		}
