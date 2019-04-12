@@ -13,7 +13,6 @@ router.post('/register', function (req, res) {
 	let memberId = req.body.id;
 	let code = req.body.code;
 
-	console.log(`messengerId ${messengerId}, memberId ${memberId}`)
 	
 	member.find({memberId}, function(error, result) {
 		if(result[0] === undefined){
@@ -28,7 +27,14 @@ router.post('/register', function (req, res) {
 				member.updateOne({memberId}, {$set: {memberConfirm: true}}, function(err, update){
 					if(update){
 						customer.create({messengerId,memberId}, function(err, customers){
-							console.log(customers);
+							if(customers){
+								res.json({
+									"messages": [
+									{"text": "Complete member registration for customers"}
+									],
+									"redirect_to_blocks": ["Admin"]
+								})
+							}
 						})
 					}
 				})
