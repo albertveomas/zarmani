@@ -163,6 +163,7 @@ router.post('/view-receivedGift', function(req, res) {
 				}else{
 					
 					gifts.forEach((current,i,arr)=> {
+						console.log('1');
 						console.log(`${current.gift} was received on ${current.date.toDateString()} ${current.date.toLocaleTimeString('en-US')}`);
 					})
 					// res.json({
