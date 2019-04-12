@@ -265,7 +265,7 @@ router.post('/give-gift', function(req, res) {
 								})
 							}else{
 								sale.find({memberId}, function(err, results){
-									if(results[0].point > gifts[0].point){
+									if(results[0].point >= gifts[0].point){
 										sale.updateOne({memberId}, {$set:{point:results[0].point-gifts[0].point}}, function(err, update){
 											giftReceived.create({memberId, gift:Name}, function(err, received) {
 												if(received){
@@ -280,7 +280,7 @@ router.post('/give-gift', function(req, res) {
 									}else{
 										res.json({
 											"messages": [
-												{"text": `Point ${gifts[0].point - results[0].point} is left to have ${results[0].name}`}
+												{"text": `Point ${gifts[0].point - results[0].point} is left to have ${gifts[0].Name}`}
 											]
 										})
 									}
