@@ -161,15 +161,14 @@ router.post('/view-receivedGift', function(req, res) {
 						]
 					})
 				}else{
+					let messages = []
+						gifts.forEach((current, i, arr) => {
+							messages.push({"text": `${current.gift} was received on ${current.date.toDateString()} ${current.date.toLocaleTimeString('en-US')}`})
+						})
+						res.json({
+							messages
+						})
 					
-					
-					res.json({
-						"messages": [
-							gifts.forEach((current, i, arr) => {
-								return {"text": `${current.gift} was received on ${current.date.toDateString()} ${current.date.toLocaleTimeString('en-US')}`}
-							})
-						]
-					})
 				}
 			})
 		}
