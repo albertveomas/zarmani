@@ -13,6 +13,7 @@ router.post('/register', function (req, res) {
 	let memberId = req.body.id;
 	let code = req.body.code;
 
+	console.log(`messengerId ${messengerId}, memberId ${memberId}`)
 	
 	member.find({memberId}, function(error, result) {
 		if(result[0] === undefined){
