@@ -62,7 +62,8 @@ router.post('/register', function (req, res) {
 								res.json({
 									"messages": [
 									{"text": "Complete member registration for staff"}
-									]
+									],
+									"redirect_to_blocks": ["Staff"]
 								})
 							}
 						})
