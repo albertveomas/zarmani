@@ -21,7 +21,7 @@ router.post('/register', function (req, res) {
 				]
 			})
 		}else{
-			if(code === result[0].code && result[0].memberConfirm === false){
+			if(code == result[0].code && result[0].memberConfirm === false){
 				member.updateOne({memberId}, {$set: {memberConfirm: true}}, function(err, update){
 					if(update){
 						customer.create({messengerId,memberId}, function(err, customers){
@@ -29,7 +29,8 @@ router.post('/register', function (req, res) {
 								res.json({
 									"messages": [
 									{"text": "Complete member registration for customers"}
-									]
+									],
+									"redirect_to_blocks": ["Member"]
 								})
 							}
 						})
