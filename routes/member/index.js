@@ -150,8 +150,8 @@ router.post('/view-receivedGift', function(req, res) {
 				]
 			})
 		}else{
-			console.log(`Customer ID is ${customers.memberId}`)
-			receivedGift.find({memberId:customers[0].memberId}, function(err, gifts){
+			console.log(`Customer ID is ${customers}`)
+			receivedGift.find({memberId:customers.memberId}, function(err, gifts){
 				if(gifts[0] === undefined){
 					res.json({
 						"messages": [
