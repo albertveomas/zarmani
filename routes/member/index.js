@@ -161,6 +161,7 @@ router.post('/view-receivedGift', function(req, res) {
 						]
 					})
 				}else{
+					console.log(`${typeof gifts}, ${gifts}`);
 					res.json({
 						"messages": [
 							{"text": "right"}
