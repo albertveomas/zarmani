@@ -163,9 +163,7 @@ router.post('/view-receivedGift', function(req, res) {
 				}else{
 					res.json({
 						"messages": [
-							gifts.forEach((current, index, arr) => {
-								return {"text": `Current ${current}`}
-							})
+							{"text": "right"}
 						]
 					})
 				}
