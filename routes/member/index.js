@@ -166,7 +166,7 @@ router.post('/view-receivedGift', function(req, res) {
 					res.json({
 						"messages": [
 							gifts.forEach((current, i, arr) => {
-								{"text": `${current.gift} was received on ${current.date.toDateString()} ${current.date.toLocaleTimeString('en-US')}`}
+								return {"text": `${current.gift} was received on ${current.date.toDateString()} ${current.date.toLocaleTimeString('en-US')}`}
 							})
 						]
 					})
