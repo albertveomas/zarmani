@@ -32,7 +32,7 @@ router.post('/register', function (req, res) {
 									"messages": [
 									{"text": "Complete member registration for customers"}
 									],
-									"redirect_to_blocks": ["Admin"]
+									"redirect_to_blocks": ["Member"]
 								})
 							}
 						})
