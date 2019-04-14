@@ -122,7 +122,7 @@ router.post('/check-point', function(req, res) {
 		}else{
 			res.json({
 				"messages": [
-					{"text": `The check point of Member ID ${memberId} is ${member[0].point}`}
+					{"text": `Member ID ${memberId} have ${member[0].point} points`}
 				]
 			})
 		}
@@ -151,7 +151,7 @@ router.post('/give-point', function(req,res){
 						if(sales){
 							res.json({
 								"messages": [
-									{"text": `The points of memberID ${memberId} is now ${sales[0].point} `}
+									{"text": `The points of memberID ${memberId} have now ${sales[0].point} points`}
 								]
 							})
 						}
@@ -160,7 +160,7 @@ router.post('/give-point', function(req,res){
 					sale.updateOne({memberId}, {$set: {point:members[0].point+point,date}}, (err, sales) =>{
 						res.json({
 							"messages": [
-								{"text": `The points of memberID ${memberId} is now ${members[0].point+point} `}
+								{"text": `The points of memberID ${memberId} have now ${members[0].point+point} points`}
 							]
 						})
 					})
