@@ -122,7 +122,7 @@ router.post('/check-point', function(req, res) {
 		}else{
 			res.json({
 				"messages": [
-					{"text": `Member ID ${memberId} have ${member[0].point} points`}
+					{"text": `Member ID ${memberId} have (${member[0].point}) points`}
 				]
 			})
 		}
@@ -203,7 +203,7 @@ router.post('/edit-debt', function(req,res) {
 				if(cor){
 					res.json({
 						"messages": [
-						{"text": `Debt is ${amount}`}
+						{"text": `Successful update, Debt amount is ${amount}`}
 						]
 					})
 				}
@@ -227,7 +227,7 @@ router.post('/view-debt', function(req, res) {
 		}else{
 			res.json({
 				"messages": [
-				{"text": `Member ID:${debts[0].memberId}\n Amount:${debts[0].amount}\npumpId:${debts[0].pumpId}\nStaff ID:${debts[0].staffId}\nDate${debts[0].date.toDateString()}`}
+				{"text": `Member ID:${debts[0].memberId}\nAmount:${debts[0].amount}\nPump ID:${debts[0].pumpId}\nStaff ID:${debts[0].staffId}\nDate:${debts[0].date.toDateString()}`}
 				]
 			})
 		}

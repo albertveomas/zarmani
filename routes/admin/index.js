@@ -112,7 +112,7 @@ router.post('/pump-register', function(req,res) {
       pump.create({pumpId,type}, function(err, result){
         res.json({
           "messages": [
-          {"text": `Petrol type ${type} with Pump ID ${pumpId} is registered`}
+          {"text": `Petrol Type ${type} with Pump ID ${pumpId} is registered`}
           ]
         })
       })
@@ -262,7 +262,7 @@ router.post('/update-fuel', function(req,res) {
             if(update){
               res.json({
                 "messages": [
-                  {"text": `You updated price of fuel ${Name} to ${price}`}
+                  {"text": `You updated Price of Fuel ${Name} to ${price}`}
                 ]
               })
             }
@@ -295,7 +295,7 @@ router.post('/check-debt', (req, res) => {
         }else{
           res.json({
             "messages": [
-              {"text": `Name: ${suppliers[0].name}\n Debt:${suppliers[0].debt} \n Date: ${suppliers[0].date.toDateString()}`}
+              {"text": `Name: ${suppliers[0].name}\nDebt:${suppliers[0].debt} \nDate: ${suppliers[0].date.toDateString()}`}
             ]
           })
         }
