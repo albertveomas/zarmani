@@ -267,24 +267,32 @@ router.post('/give-gift', function(req, res) {
 								})
 							}else{
 								sale.find({memberId}, function(err, results){
-									if(results[0].point >= gifts[0].point){
-										sale.updateOne({memberId}, {$set:{point:results[0].point-gifts[0].point}}, function(err, update){
-											giftReceived.create({memberId, gift:Name,date}, function(err, received) {
-												if(received){
-													res.json({
-														"messages": [
-															{"text": `Your point is now ${results[0].point-gifts[0].point}`}
-														]
-													})
-												}
-											})
-										})
-									}else{
+									if(results[0] === undefined){
 										res.json({
 											"messages": [
-												{"text": `Point ${gifts[0].point - results[0].point} is left to have ${gifts[0].Name}`}
+												{"text": "You don't have any point. Please purchase some petrol and you will get point"}
 											]
 										})
+									}else{
+										if (results[0].point >= gifts[0].point) {
+											sale.updateOne({ memberId }, { $set: { point: results[0].point - gifts[0].point } }, function (err, update) {
+												giftReceived.create({ memberId, gift: Name, date }, function (err, received) {
+													if (received) {
+														res.json({
+															"messages": [
+																{ "text": `Your point is now ${results[0].point - gifts[0].point}` }
+															]
+														})
+													}
+												})
+											})
+										} else {
+											res.json({
+												"messages": [
+													{ "text": `Point ${gifts[0].point - results[0].point} is left to have ${gifts[0].Name}` }
+												]
+											})
+										}
 									}
 								})
 							}
