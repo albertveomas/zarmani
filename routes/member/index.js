@@ -135,7 +135,7 @@ router.post('/view-debt', function(req, res) {
 		}else{
 			res.json({
 				"messages": [
-				{"text": `Member ID:${debts[0].memberId}\nAmount:${debts[0].amount}\nPump ID:${debts[0].pumpId}\nStaff ID:${debts[0].staffId}\nDate:${debts[0].date.toDateString()}`}
+				{"text": `Member ID:${debts[0].memberId}\nAmount:${debts[0].amount}\nPump No:${debts[0].pumpId}\nStaff ID:${debts[0].staffId}\nDate:${debts[0].date.toDateString()}`}
 				]
 			})
 		}
