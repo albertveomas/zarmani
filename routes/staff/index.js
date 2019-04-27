@@ -242,6 +242,7 @@ router.post('/give-gift', function(req, res) {
 	let messengerId = req.body["messenger user id"];
 
 	StaffMessenger.find({messengerId}, function(err, staffs){
+		console.log(`staff ${staffs}`)
 		if(staffs[0] === undefined){
 			res.json({
 				"messages": [
@@ -280,7 +281,7 @@ router.post('/give-gift', function(req, res) {
 													if (received) {
 														res.json({
 															"messages": [
-																{ "text": `Your point is now ${results[0].point - gifts[0].point}` }
+																{ "text": `The point is now ${results[0].point - gifts[0].point}` }
 															]
 														})
 													}
