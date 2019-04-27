@@ -135,7 +135,7 @@ router.post('/give-point', function(req,res){
 	let memberId = req.body.id;
 	let date = new Date();
 
-	customer.find({messengerId}, function(err, customers){
+	StaffMessenger.find({messengerId}, function(err, customers){
 		if(customers[0]===undefined){
 			res.json({
 				"messages": [
