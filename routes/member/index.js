@@ -77,15 +77,8 @@ router.post('/fuel-price/octane', function(req, res) {
 router.post('/fuel-price/disel', function(req, res) {
 	let messengerId = req.body["messenger user id"];
 	let Name = req.body.disel;
-	customer.find({messengerId}, function(err, customers) {
-		if(customers[0] === undefined){
-			res.json({
-				"messages": [
-					{"text": "You are not allowed"}
-				]
-			})
-		}else{
-			fuel.find({Name}, (err, result) => {
+	
+	fuel.find({Name}, (err, result) => {
 				if(result){
 					res.json({
 						"messages": [
@@ -94,8 +87,6 @@ router.post('/fuel-price/disel', function(req, res) {
 					})
 				}
 			})
-		}
-	})
 })
 
 router.post('/fuel-price/premimum', function(req, res) {
